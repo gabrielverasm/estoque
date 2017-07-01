@@ -1,0 +1,65 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario' : 'Novo Usuario'}</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"
+				converter="usuarioConverter" />
+		</f:metadata>
+
+		<h1>#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario'
+			: 'Novo Usuario'}</h1>
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroUsuarioBean.salvar()}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+				<p:panelGrid columns="2"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" size="90" styleClass="up"
+						value="#{cadastroUsuarioBean.usuario.nome}"
+						placeholder="Informe o nome do Usuario" />
+
+					<p:outputLabel value="Cargo" for="cargo" />
+					<p:inputText id="nome" size="90" styleClass="up"
+						placeholder="Informe o cargo" />
+
+					<p:outputLabel value="Email" for="email" />
+					<p:inputText id="email" size="90" styleClass="up"
+						value="#{cadastroUsuarioBean.usuario.email}"
+						placeholder="Informe o email do Usuario" />
+
+					<p:outputLabel value="Senha" for="senha" />
+					<p:password id="senha" size="40"
+						value="#{cadastroUsuarioBean.usuario.senha}"
+						placeholder="Informe a senha" />
+
+				</p:panelGrid>
+			</div>
+
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

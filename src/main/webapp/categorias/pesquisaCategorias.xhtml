@@ -1,0 +1,65 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Paciente</ui:define>
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<p:messages autoUpdate="true" closable="true" />
+
+			<h1>Pesquisa de Categorias</h1>
+
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa"
+						action="#{pesquisaCategoriaBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/categorias/cadastroCategoria" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px">
+
+				<p:outputLabel value="Descricao" />
+				<p:inputText size="40" styleClass="up"
+					value="#{pesquisaCategoriaBean.categoriaParaPesquisa.descricao}" />
+
+			</p:panelGrid>
+
+			
+				<p:dataTable id="tabelaCliente" reflow="true"
+					value="#{pesquisaCategoriaBean.listaCategoria}" var="categoria"
+					style="margin-top: 20px"
+					emptyMessage="Nenhuma categoria encontrada." rows="20"
+					paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom">
+
+					<p:column headerText="Sub-Categoria">
+						<h:outputText value="#{categoria.descricao}" />
+					</p:column>
+
+					<p:column headerText="Categoria">
+						<h:outputText value="#{categoria.categoriaPai.descricao}" />
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/categorias/cadastroCategoria">
+							<f:param name="categoria" value="#{categoria.id}" />
+						</p:button>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

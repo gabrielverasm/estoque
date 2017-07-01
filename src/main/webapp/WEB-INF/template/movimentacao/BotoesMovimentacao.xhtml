@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar style="margin-top: 20px">
+		<p:toolbarGroup>
+			<p:button value="Novo" outcome="/movimentacao/CadastroMovimentacao" />
+			<p:commandButton value="Salvar" update="@form" 
+				action="#{cadastroMovimentacaoBean.salvar}" />
+		</p:toolbarGroup>
+
+		<p:toolbarGroup align="right">
+
+			<p:commandButton value="Baixar" title="Baixar Movimentações." />
+
+			<p:commandButton value="Cancelar" title="Cancelar Movimentações." />
+
+			<p:separator />
+
+			<p:button value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
+		</p:toolbarGroup>
+	</p:toolbar>
+
+</ui:composition>

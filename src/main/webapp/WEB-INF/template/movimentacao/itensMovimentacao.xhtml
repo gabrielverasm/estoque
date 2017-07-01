@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<p:dataTable rows="5" id="dtItensMov" var="itemMovimentacao"
+		emptyMessage="Nenhum item encontradoss."
+		value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}">
+
+
+		<p:column headerText="Qtde" style="width: 70px">
+			<p:inputText value="#{itemMovimentacao.quantidade}" style="width: 40px"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
+				<p:ajax event="change" process="@this"
+					update="dtItensMov"
+					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(itemMovimentacao,linha)}" />
+			</p:inputText>
+		</p:column>
+
+		<p:column headerText="Produto"
+			style="text-align: center; width: 250px">
+			<h:outputText value="#{itemMovimentacao.produto.nome}" style="width: 100px"
+				rendered="#{itemMovimentacao.produtoAssociado}" />
+
+			<p:autoComplete styleClass="up"
+				value="#{cadastroMovimentacaoBean.produtoLinha}"
+				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
+				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
+				forceSelection="true" rendered="#{not itemMovimentacao.produtoAssociado}">
+
+				<p:ajax event="itemSelect"
+					update="dtItensMov"
+					listener="#{cadastroMovimentacaoBean.carregarProdutoLinhaEditavel}" />
+
+			</p:autoComplete>
+		</p:column>
+
+		<p:columnGroup type="footer">
+			<p:row>
+				<p:column colspan="4" footerText="Quantidade de itens:"
+					style="text-align: right;" />
+				<p:column style="text-align:center;">
+
+				</p:column>
+			</p:row>
+
+		</p:columnGroup>
+
+	</p:dataTable>
+</ui:composition>

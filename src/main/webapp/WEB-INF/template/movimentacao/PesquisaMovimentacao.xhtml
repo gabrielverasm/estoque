@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="FormPesquisaMov">
+		<p:panelGrid id="pngpesquisaMov" columns="4" style="margin-top: 20px"
+			styleClass="ui-panelgrid-blank">
+
+			<p:outputLabel value="Número" />
+			<h:panelGroup>
+				<p:inputText size="10" placeholder="Num. movimentação" />
+	    			a
+	    			<p:inputText size="10" placeholder="Num. movimentação" />
+			</h:panelGroup>
+
+			<p:outputLabel value="Data de criação" />
+			<h:panelGroup>
+				<p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
+					placeholder="Informe uma data inicial" />
+	    			a
+	    			<p:calendar size="10" pattern="dd/MM/yyyy" locale="pt"
+					placeholder="Informe uma data final" />
+			</h:panelGroup>
+
+			<p:outputLabel value="Status" />
+			<p:selectManyCheckbox>
+				<f:selectItems var="status" itemValue="teste" itemLabel="Tesste" />
+			</p:selectManyCheckbox>
+
+			<p:outputLabel value="Status" />
+			<p:inputText size="40" placeholder="Informe o título do pedido." />
+
+		</p:panelGrid>
+
+		<p:dataTable id="dtbMovimentacao" reflow="true" var="movimentacao"
+			style="margin-top: 10px" emptyMessage="Nenhum pedido encontrado."
+			rows="5" paginator="true" paginatorAlwaysVisible="false"
+			paginatorPosition="bottom">
+
+			<p:column headerText="Número" style="text-align: center; width: 80px">
+				<h:outputText />
+			</p:column>
+
+			<p:column headerText="Desccrição:" style="text-align: center">
+				<h:outputText />
+			</p:column>
+
+			<p:column headerText="Operação"
+				style="text-align: center; width: 100px">
+				<h:outputText />
+			</p:column>
+
+			<p:column headerText="Status"
+				style="text-align: center; width: 100px">
+				<h:outputText />
+			</p:column>
+
+			<p:column headerText="Criação:"
+				style="text-align: center; width: 100px">
+				<h:outputText />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+</ui:composition>

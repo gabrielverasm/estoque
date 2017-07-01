@@ -1,0 +1,50 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="movimentecao" value="#{cadastroMovimentacaoBean.movimentacao}" />
+		<f:event listener="#{cadastroMovimentacaoBean.inicializar()}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="titulo">Nova Movimentaão</ui:define>
+
+	<ui:define name="corpo">
+		<h:form id="frmCadMov">
+			<h1>Nova Movimentação</h1>
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<ui:include
+				src="/WEB-INF/template/movimentacao/BotoesMovimentacao.xhtml" />
+
+			<ui:include
+				src="/WEB-INF/template/movimentacao/CapaMovimentacao.xhtml" />
+
+			<p:tabView style="margin-top: 20px;width:100%">
+				<p:tab title="Itens">
+					<ui:include
+						src="/WEB-INF/template/movimentacao/itensMovimentacao.xhtml" />
+				</p:tab>
+				<p:tab title="Observação">
+					<h:form id="formObs">
+						<h:panelGroup layout="block" style="padding-right: 10px">
+							<p:inputTextarea rows="5" style="width: 100%" />
+						</h:panelGroup>
+					</h:form>
+				</p:tab>
+
+				<p:tab title="Pesquisa">
+					<ui:include
+						src="/WEB-INF/template/movimentacao/PesquisaMovimentacao.xhtml" />
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
