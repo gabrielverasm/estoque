@@ -79,16 +79,16 @@ public class Movimentacao implements Serializable {
 		
 		if(this.statusMovimentacao == StatusMovimentacao.PENDENTE)
 		{
-			Produto produto = new Produto();
-			
-			ItemMovimentacao item = new ItemMovimentacao();
-			item.setProduto(produto);
-			item.setQuantidade(1.0);
-			item.setMovimentacao(this);
-		//	item.setUsuario(null);
+//			Produto produto = new Produto();
+//			
+//			ItemMovimentacao item = new ItemMovimentacao();
+//			item.setProduto(produto);
+//			item.setQuantidade(1.0);
+//			item.setMovimentacao(this);
+//			item.setUsuario(null);
 //			item.setItemProduto(null);
-			
-			this.getItensMovimentacao().add(0,item);
+//			
+//			this.getItensMovimentacao().add(0,item);
 			
 		}
 	}

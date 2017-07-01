@@ -36,6 +36,10 @@ public class ProdutoService implements Serializable {
 		produtos.remover(produto);
 	}
 	
+	public Produto porId(Long id){
+		return this.produtos.porId(id);
+	}
+	
 	public List<Produto> filtrados(ProdutoParaPesquisa filtro) {
 		List<Produto> lista = null;
 		

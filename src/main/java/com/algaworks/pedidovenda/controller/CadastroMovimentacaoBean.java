@@ -1,6 +1,7 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class CadastroMovimentacaoBean implements Serializable {
 	}
 	
 	public void salvar(){
+		this.movimentacao.setItensMovimentacao(passaValor());
 		this.movimentacao = this.movimentacaoService.salvar(movimentacao);
 	}
 	
@@ -67,15 +69,27 @@ public class CadastroMovimentacaoBean implements Serializable {
 		
 		if(this.produtoLinha != null){
 			//dataDeRecebimento, dataDeValidade, id_movimentacao, id_produto, quantidade, id_usuario
-//			item.setDataDeRecebimento(new Date());
-//			item.setDataDeValidade(new Date());
-//			item.setProduto(this.produtoLinha);
-//			item.setQuantidade(1.0);
-//			item.setMovimentacao(this.movimentacao);
-//			item.setItemProduto(null);
-//			this.movimentacao.adicionaItemVazio();
-//			this.produtoLinha = null;
+			item.setDataDeRecebimento(new Date());
+			item.setDataDeValidade(new Date());
+			item.setProduto(this.produtoService.porId(1L));
+			item.setQuantidade(1.0);
+			//item.setMovimentacao(this.movimentacao);
+			//item.setItemProduto(itemP);
+			this.movimentacao.adicionaItemVazio();
+			this.produtoLinha = null;
 		}
+	}
+	
+	public List<ItemMovimentacao> passaValor(){
+		List<ItemMovimentacao> lista = new ArrayList<>();
+		ItemMovimentacao item = this.movimentacao.getItensMovimentacao().get(0);
+		item.setDataDeRecebimento(new Date());
+		item.setDataDeValidade(new Date());
+		item.setProduto(this.produtoService.porId(1L));
+		item.setQuantidade(1.0);
+		item.setMovimentacao(movimentacao);
+		lista.add(item);
+		return lista;
 	}
 	
 	public void atualizarQuantidade(ItemMovimentacao item, int linha) {

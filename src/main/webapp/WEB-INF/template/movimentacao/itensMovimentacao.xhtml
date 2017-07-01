@@ -9,32 +9,32 @@
 		value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}">
 
 
-		<p:column headerText="Qtde" style="width: 70px">
-			<p:inputText value="#{itemMovimentacao.quantidade}" style="width: 40px"
-				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
-				<p:ajax event="change" process="@this"
-					update="dtItensMov"
-					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(itemMovimentacao,linha)}" />
-			</p:inputText>
-		</p:column>
+<!-- 		<p:column headerText="Qtde" style="width: 70px"> -->
+<!-- 			<p:inputText value="#{itemMovimentacao.quantidade}" style="width: 40px" -->
+<!-- 				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}"> -->
+<!-- 				<p:ajax event="change" process="@this" -->
+<!-- 					update="dtItensMov" -->
+<!-- 					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(itemMovimentacao,linha)}" /> -->
+<!-- 			</p:inputText> -->
+<!-- 		</p:column> -->
 
-		<p:column headerText="Produto"
-			style="text-align: center; width: 250px">
-			<h:outputText value="#{itemMovimentacao.produto.nome}" style="width: 100px"
-				rendered="#{itemMovimentacao.produtoAssociado}" />
+<!-- 		<p:column headerText="Produto" -->
+<!-- 			style="text-align: center; width: 250px"> -->
+<!-- 			<h:outputText value="#{itemMovimentacao.produto.nome}" style="width: 100px" -->
+<!-- 				rendered="#{itemMovimentacao.produtoAssociado}" /> -->
 
-			<p:autoComplete styleClass="up" converter="produtoConverter"
-				value="#{cadastroMovimentacaoBean.produtoLinha}"
-				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
-				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
-				forceSelection="true" rendered="#{not itemMovimentacao.produtoAssociado}">
+<!-- 			<p:autoComplete styleClass="up" converter="produtoConverter" -->
+<!-- 				value="#{cadastroMovimentacaoBean.produtoLinha}" -->
+<!-- 				completeMethod="#{cadastroMovimentacaoBean.completarProduto}" -->
+<!-- 				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" -->
+<!-- 				forceSelection="true" rendered="#{not itemMovimentacao.produtoAssociado}"> -->
 
-				<p:ajax event="itemSelect"
-					update="dtItensMov"
-					listener="#{cadastroMovimentacaoBean.carregarProdutoLinhaEditavel}" />
+<!-- 				<p:ajax event="itemSelect" -->
+<!-- 					update="dtItensMov" -->
+<!-- 					listener="#{cadastroMovimentacaoBean.carregarProdutoLinhaEditavel}" /> -->
 
-			</p:autoComplete>
-		</p:column>
+<!-- 			</p:autoComplete> -->
+<!-- 		</p:column> -->
 
 		<p:columnGroup type="footer">
 			<p:row>
