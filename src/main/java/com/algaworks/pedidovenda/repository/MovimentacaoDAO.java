@@ -36,6 +36,8 @@ public class MovimentacaoDAO implements Serializable {
 			throw new NegocioException("Movimentacao nao pode ser excluido");
 		}
 	}
+	
+	
 
 	//implementar pesquisa por data
 	public Movimentacao porSku(String sku) {

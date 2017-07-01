@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -50,7 +51,7 @@ public class Movimentacao implements Serializable {
 //	@Column(nullable = true)
 	private String operacao;
 	
-	@OneToMany(mappedBy = "movimentacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "movimentacao", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ItemMovimentacao> itensMovimentacao = new ArrayList<>();
 
 	@Transient
@@ -74,6 +75,23 @@ public class Movimentacao implements Serializable {
 		return !isAlteravel();
 	}
 	
+	public void adicionaItemVazio() {
+		
+		if(this.statusMovimentacao == StatusMovimentacao.PENDENTE)
+		{
+			Produto produto = new Produto();
+			
+			ItemMovimentacao item = new ItemMovimentacao();
+			item.setProduto(produto);
+			item.setQuantidade(1.0);
+			item.setMovimentacao(this);
+		//	item.setUsuario(null);
+//			item.setItemProduto(null);
+			
+			this.getItensMovimentacao().add(0,item);
+			
+		}
+	}
 	
 	//get and set
 	public Long getId() {
@@ -183,22 +201,6 @@ public class Movimentacao implements Serializable {
 		return true;
 	}
 
-	public void adicionaItemVazio() {
-		
-		if(this.statusMovimentacao == StatusMovimentacao.PENDENTE)
-		{
-			Produto produto = new Produto();
-			
-			ItemMovimentacao item = new ItemMovimentacao();
-			item.setProduto(produto);
-			item.setQuantidade(1.0);
-			item.setMovimentacao(this);
-			item.setUsuario(null);
-//			item.setItemProduto(null);
-			
-			this.getItensMovimentacao().add(0,item);
-			
-		}
-	}
+
 
 }

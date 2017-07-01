@@ -1,7 +1,6 @@
 package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,18 +25,22 @@ public class ItemMovimentacao implements Serializable {
 	@Column(length = 50)
 	private double quantidade;
 	@ManyToOne
-	@JoinColumn(name = "id_produto")
+	@JoinColumn(name = "id_produto", referencedColumnName="id")
 	private Produto produto;
-//	@ManyToOne
+
+	//	@ManyToOne
 //	@JoinColumn(name= "id_item_produto")
 //	private ItemProduto itemProduto;
 	@ManyToOne
 	@JoinColumn(name = "id_movimentacao")
 	private Movimentacao movimentacao;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dataDeRecebimento;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dataDeValidade;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
@@ -143,6 +146,10 @@ public class ItemMovimentacao implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void setQuantidade(double quantidade) {
+		this.quantidade = quantidade;
 	}
 
 }

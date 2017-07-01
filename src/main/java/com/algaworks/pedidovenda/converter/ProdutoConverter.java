@@ -9,7 +9,7 @@ import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.ProdutoDAO;
 import com.algaworks.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Produto.class)
+@FacesConverter(forClass = Produto.class,value="produtoConverter")
 public class ProdutoConverter implements Converter {
 
 	//@Inject

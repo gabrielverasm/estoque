@@ -23,7 +23,7 @@
 			<h:outputText value="#{itemMovimentacao.produto.nome}" style="width: 100px"
 				rendered="#{itemMovimentacao.produtoAssociado}" />
 
-			<p:autoComplete styleClass="up"
+			<p:autoComplete styleClass="up" converter="produtoConverter"
 				value="#{cadastroMovimentacaoBean.produtoLinha}"
 				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
 				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"

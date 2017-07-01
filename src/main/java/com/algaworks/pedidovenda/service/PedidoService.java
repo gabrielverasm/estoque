@@ -28,7 +28,7 @@
 //	public List<Pedido> filtrados(PedidoParaPesquisa pedido) {
 //		if (pedido.getNumeroDe() == null && pedido.getNumeroAte() == null) {
 //			pedido.setNumeroDe(null);
-//			pedido.setNumeroAte(null);
+////			pedido.setNumeroAte(null);
 //		}
 //		return pedidoDAO.filtrados(pedido);
 //	}

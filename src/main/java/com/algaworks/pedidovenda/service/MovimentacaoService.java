@@ -16,6 +16,10 @@ public class MovimentacaoService implements Serializable {
 	
 	@Inject
 	private MovimentacaoDAO movimentacaoDAO;
+	
+	public Movimentacao porId(Movimentacao movimentacao){
+		return movimentacaoDAO.porId(movimentacao.getId());
+	}
 
 	@Transactional
 	public Movimentacao salvar(Movimentacao movimentacao){
