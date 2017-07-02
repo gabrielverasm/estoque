@@ -1,6 +1,7 @@
 package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,11 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name = "item_movimentacao")
 public class ItemMovimentacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,18 +24,9 @@ public class ItemMovimentacao implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@Column(length = 50)
-	private double quantidade;
+	
 	@ManyToOne
-	@JoinColumn(name = "id_produto", referencedColumnName="id")
-	private Produto produto;
-
-	//	@ManyToOne
-//	@JoinColumn(name= "id_item_produto")
-//	private ItemProduto itemProduto;
-	@ManyToOne
-	@JoinColumn(name = "id_movimentacao")
+	@JoinColumn(name = "id_movimentacao", nullable = false)
 	private Movimentacao movimentacao;
 	
 	@Temporal(TemporalType.DATE)
@@ -41,10 +35,23 @@ public class ItemMovimentacao implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataDeValidade;
 	
+	//
+	
+	@Column(nullable = false, length = 3)
+	private Integer quantidade = 1;
+	
+	@Column(name = "valor_unitario", precision = 10, scale = 2)
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
+	
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	@JoinColumn(name = "id_produto")
+	private Produto produto;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "id_pedido")
+//	private Pedido pedido;
 
+	//get and set
 	
 	public Long getId() {
 		return id;
@@ -53,14 +60,33 @@ public class ItemMovimentacao implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
+
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
+	}
+
+
 
 	
-	public Double getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
+	}
+
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
 	}
 
 	
@@ -73,56 +99,14 @@ public class ItemMovimentacao implements Serializable {
 	}
 
 	
-//	public ItemProduto getItemProduto() {
-//		return itemProduto;
+//	public Pedido getPedido() {
+//		return pedido;
 //	}
 //
-//	public void setItemProduto(ItemProduto itemProduto) {
-//		this.itemProduto = itemProduto;
+//	public void setPedido(Pedido pedido) {
+//		this.pedido = pedido;
 //	}
 
-	
-	public Movimentacao getMovimentacao() {
-		return movimentacao;
-	}
-
-	public void setMovimentacao(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
-	}
-
-	
-	public Date getDataDeRecebimento() {
-		return dataDeRecebimento;
-	}
-
-	public void setDataDeRecebimento(Date dataDeRecebimento) {
-		this.dataDeRecebimento = dataDeRecebimento;
-	}
-
-	
-	public Date getDataDeValidade() {
-		return dataDeValidade;
-	}
-
-	public void setDataDeValidade(Date dataDeValidade) {
-		this.dataDeValidade = dataDeValidade;
-	}
-
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	@Transient
-	public boolean isProdutoAssociado(){
-		return this.getProduto() != null && this.getProduto().getId() != null;
-	}
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -148,8 +132,25 @@ public class ItemMovimentacao implements Serializable {
 		return true;
 	}
 
-	public void setQuantidade(double quantidade) {
-		this.quantidade = quantidade;
+	@Transient
+	public BigDecimal getValorTotal() {
+		//total = valor da unidade * quantidade
+		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
+	
+	@Transient
+	public boolean isProdutoAssociado(){
+		return this.getProduto() != null && this.getProduto().getId() != null;
 	}
 
+//	@Transient
+//	public boolean isEstoqueSuficiente(){
+//		return this.getPedido().isEmitido() ||  this.getProduto().getId() == null
+//				|| this.getProduto().getQuantidadeEstoque() >= this.getQuantidade();
+//	}
+	
+//	@Transient
+//	public boolean isEstoqueInSuficiente(){
+//		return !isEstoqueSuficiente();
+//	}
 }

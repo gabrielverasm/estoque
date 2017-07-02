@@ -5,13 +5,17 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
+
+//import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.algaworks.pedidovenda.model.Movimentacao;
-import com.algaworks.pedidovenda.service.NegocioException;
-import com.algaworks.pedidovenda.util.jpa.Transactional;
+import com.algaworks.pedidovenda.repository.filter.MovimentacaoParaPesquisa;
 
 public class MovimentacaoDAO implements Serializable {
 
@@ -20,56 +24,77 @@ public class MovimentacaoDAO implements Serializable {
 	@Inject
 	private EntityManager manager;
 
-	public Movimentacao guardar(Movimentacao movimentacao) {
+	@SuppressWarnings("unchecked")
+	public List<Movimentacao> filtrados(MovimentacaoParaPesquisa movimentacao) {
+		Session session = this.manager.unwrap(Session.class);
+
+		Criteria criteria = session.createCriteria(Movimentacao.class)
+				.createAlias("cliente", "c") // associação join com cliente e
+												// nomeamos como "c"
+				.createAlias("vendedor", "v"); // associação join com usuario e
+												// nomeamos como "v"
+
+		if (movimentacao.getNumeroDe() != null) {
+			// id deve ser maior ou igual (ge = greater or equals) a
+			// movimentacao.numeroDe
+			criteria.add(Restrictions.ge("id", movimentacao.getNumeroDe()));
+		}
+
+		if (movimentacao.getNumeroAte() != null) {
+			// id deve ser menor ou igual (le = lower or equals) a
+			// movimentacao.numeroDe
+			criteria.add(Restrictions.le("id", movimentacao.getNumeroAte()));
+		}
+
+		if (movimentacao.getDataCriacaoDe() != null) {
+			// id deve ser maior ou igual (ge = greater or equals) a
+			// movimentacao.numeroDe
+			criteria.add(Restrictions.ge("dataCriacao",
+					movimentacao.getDataCriacaoDe()));
+		}
+
+		if (movimentacao.getDataCriacaoAte() != null) {
+			// id deve ser menor ou igual (le = lower or equals) a
+			// movimentacao.numeroDe
+			criteria.add(Restrictions.le("dataCriacao",
+					movimentacao.getDataCriacaoAte()));
+		}
+
+		if (StringUtils.isNotBlank(movimentacao.getNomeCliente())) {
+			// acessamos o nome do cliente associado ao movimentacao pelo alias "c"
+			criteria.add(Restrictions.ilike("c.nome", movimentacao.getNomeCliente(),
+					MatchMode.ANYWHERE));
+		}
+
+		if (StringUtils.isNotBlank(movimentacao.getNomeVendedor())) {
+			// acessamos o nome do vendedor associado ao movimentacao pelo alias "v"
+			criteria.add(Restrictions.ilike("v.nome", movimentacao.getNomeVendedor(),
+					MatchMode.ANYWHERE));
+		}
+
+	//	if (movimentacao.getStatuses() != null && movimentacao.getStatuses().length > 0) {
+			// adicionamos uma restrição "in", passando um array de constantes
+			// da ENUM StatusMovimentacao
+//			criteria.add(Restrictions.in("status", movimentacao.getStatuses()));
+//		}
+
+		return criteria.addOrder(Order.desc("id")).list();
+	}
+
+	public Movimentacao porId(Long id) {
+		return this.manager.find(Movimentacao.class, id);
+	}
+	
+	public Movimentacao porId(Movimentacao movimentacao) {
+		return this.manager.find(Movimentacao.class, movimentacao.getId());
+	}
+
+	
+
+	// crud
+	public Movimentacao salvar(Movimentacao movimentacao) {
 		return manager.merge(movimentacao);
 	}
 
-	@Transactional
-	public void remover(Movimentacao movimentacao) {
-		try {
-			movimentacao = porId(movimentacao.getId());
-			manager.remove(movimentacao);
-			manager.flush();
-
-		} catch (PersistenceException e) {
-			// TODO: handle exception
-			throw new NegocioException("Movimentacao nao pode ser excluido");
-		}
-	}
-	
-	
-
-	//implementar pesquisa por data
-	public Movimentacao porSku(String sku) {
-		try {
-			return manager
-					.createQuery("from Movimentacao where upper(sku) = :sku",
-							Movimentacao.class)
-					.setParameter("sku", sku.toUpperCase()).getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-
-	
-	public Movimentacao porId(Long id) {
-		return manager.find(Movimentacao.class, id);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Movimentacao> porNome(String nome) {
-		String jpql = "from Movimentacao p where p.nome like :nome ORDER BY nome ASC";
-		Query query = manager.createQuery(jpql, Movimentacao.class);
-		query.setParameter("nome", "%" + nome.toUpperCase() + "%");
-
-		return query.getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Movimentacao> listarTodos(){
-		String jpql = "from Movimentacao ORDER BY nome ASC";
-		Query query = manager.createQuery(jpql,Movimentacao.class);
-		return query.getResultList();
-	}
 
 }

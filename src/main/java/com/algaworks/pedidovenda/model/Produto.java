@@ -27,23 +27,51 @@ public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
-	private String nome;
-	private Integer codigoDeBarras;
-	private Double quantidade;
-	private Double estoqueMinimo;
-	private Double qtdDiaria;
-	private Date dataDeValidade;
-	private Date prazoDeEntrega;
-	private Grupo grupo;
-	private Unidade unidade;
-	private Status status;
-//	private List<ItemProduto> itensProduto = new ArrayList<>();
-	private Usuario usuario;
-
 	@Id
 	@GeneratedValue
+	private Long id;
+
+	@NotNull
+	@Length(max = 100)
+	@Column(length = 100, nullable = false, unique = true)
+	private String nome;
+
+	@Column(unique = true)
+	private Integer codigoDeBarras;
+
+	@Column(precision = 7, scale = 2)
+	private Double quantidade;
+
+	@Column(nullable = false, precision = 8, scale = 2)
+	private Double estoqueMinimo;
+
+	@Column(nullable = false, precision = 5, scale = 2)
+	private Double qtdDiaria;
+
+	@Temporal(TemporalType.DATE)
+	private Date dataDeValidade;
+
+	@Temporal(TemporalType.DATE)
+	private Date prazoDeEntrega;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	private Grupo grupo;
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private Unidade unidade;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 10)
+	private Status status;
+
+	// private List<ItemProduto> itensProduto = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+
 	public Long getId() {
 		return id;
 	}
@@ -52,9 +80,6 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	@NotNull
-	@Length(max = 100)
-	@Column(length = 100, nullable = false, unique = true)
 	public String getNome() {
 		return nome;
 	}
@@ -63,7 +88,6 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	@Column(unique = true)
 	public Integer getCodigoDeBarras() {
 		return codigoDeBarras;
 	}
@@ -72,7 +96,6 @@ public class Produto implements Serializable {
 		this.codigoDeBarras = codigoDeBarras;
 	}
 
-	@Column(precision = 7, scale = 2)
 	public Double getQuantidade() {
 		return quantidade;
 	}
@@ -81,7 +104,6 @@ public class Produto implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	@Column(nullable = false, precision = 8, scale = 2)
 	public Double getEstoqueMinimo() {
 		return estoqueMinimo;
 	}
@@ -90,7 +112,6 @@ public class Produto implements Serializable {
 		this.estoqueMinimo = estoqueMinimo;
 	}
 
-	@Column(nullable = false, precision = 5, scale = 2)
 	public Double getQtdDiaria() {
 		return qtdDiaria;
 	}
@@ -99,7 +120,6 @@ public class Produto implements Serializable {
 		this.qtdDiaria = qtdDiaria;
 	}
 
-	@Temporal(TemporalType.DATE)
 	public Date getDataDeValidade() {
 		return dataDeValidade;
 	}
@@ -108,7 +128,6 @@ public class Produto implements Serializable {
 		this.dataDeValidade = dataDeValidade;
 	}
 
-	@Temporal(TemporalType.DATE)
 	public Date getPrazoDeEntrega() {
 		return prazoDeEntrega;
 	}
@@ -117,8 +136,6 @@ public class Produto implements Serializable {
 		this.prazoDeEntrega = prazoDeEntrega;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 20)
 	public Grupo getGrupo() {
 		return grupo;
 	}
@@ -127,8 +144,6 @@ public class Produto implements Serializable {
 		this.grupo = grupo;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(length = 20)
 	public Unidade getUnidade() {
 		return unidade;
 	}
@@ -137,8 +152,6 @@ public class Produto implements Serializable {
 		this.unidade = unidade;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 10)
 	public Status getStatus() {
 		return status;
 	}
@@ -147,17 +160,16 @@ public class Produto implements Serializable {
 		this.status = status;
 	}
 
-//	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
-//	public List<ItemProduto> getItensProduto() {
-//		return itensProduto;
-//	}
-//
-//	public void setItensProduto(List<ItemProduto> itensProduto) {
-//		this.itensProduto = itensProduto;
-//	}
+	// @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval
+	// = true)
+	// public List<ItemProduto> getItensProduto() {
+	// return itensProduto;
+	// }
+	//
+	// public void setItensProduto(List<ItemProduto> itensProduto) {
+	// this.itensProduto = itensProduto;
+	// }
 
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -190,4 +202,11 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
+	
 }
