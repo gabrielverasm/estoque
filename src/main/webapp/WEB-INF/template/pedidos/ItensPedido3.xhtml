@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<p:dataTable value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}" var="item"
+		rowIndexVar="linha" id="tabelaItens">
+
+		<p:column headerText="Qtde" style="width: 70px">
+			<p:inputText value="#{item.quantidade}" style="width: 40px"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
+				<p:ajax event="change" process="@this"
+					update="tabelaItens"
+					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
+			</p:inputText>
+		</p:column>
+
+
+		<p:column headerText="Produto"
+			style="text-align: center; width: 250px">
+			<h:outputText value="#{item.produto .nome}" style="width: 100px"
+				rendered="#{item.produtoAssociado}" />
+
+			<p:autoComplete styleClass="up" converter="produtoConverter"
+				value="#{cadastroMovimentacaoBean.produtoLinhaEditavel}"
+				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
+				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
+				forceSelection="true"
+				rendered="#{not item.produtoAssociado}">
+
+				<p:ajax event="itemSelect"
+					update="tabelaItens"
+					listener="#{cadastroMovimentacaoBean.carregarProdutoLinhaEditavel}" />
+
+			</p:autoComplete>
+		</p:column>
+
+
+
+
+
+	</p:dataTable>
+	
+</ui:composition>

@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<div class="ui-fluid">
+		<p:panelGrid columns="4" style="margin-top: 20px">
+
+			<p:outputLabel value="Número"
+				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}" />
+			<h:outputText value="#{cadastroMovimentacaoBean.movimentacao.id}"
+				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}" />
+
+			<p:outputLabel value="Data de criação"
+				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}" />
+			<h:outputText
+				value="#{cadastroMovimentacaoBean.movimentacao.dataCriacao}"
+				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}">
+				<f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss" />
+			</h:outputText>
+
+			<p:outputLabel value="Tipo:" for="movimentacao" />
+			<p:selectOneButton id="movimentacao"
+				value="#{cadastroMovimentacaoBean.movimentacao.operacao}">
+				<f:selectItem itemLabel="Entrada" itemValue="entrada" />
+				<f:selectItem itemLabel="Saída" itemValue="saida" />
+			</p:selectOneButton>
+
+			<p:outputLabel for="nome" value="Descrição:" />
+			<p:inputText id="nome" size="60" maxlength="150" required="true"
+				value="#{cadastroMovimentacaoBean.movimentacao.descricao}"
+				placeholder="Informe um título para sua movimentação" />
+
+			<p:outputLabel value="Status" />
+			<h:outputText
+				value="#{cadastroMovimentacaoBean.movimentacao.statusMovimentacao}" />
+
+			<h:panelGroup>
+				<p:outputLabel value="Prazo de Entrega:" />
+			</h:panelGroup>
+
+			<p:calendar pattern="dd/MM/yyyy" styleClass="calendar-png"
+				locale="pt"
+				value="#{cadastroMovimentacaoBean.movimentacao.prazoDeEntrega}" />
+		</p:panelGrid>
+	</div>
+</ui:composition>
