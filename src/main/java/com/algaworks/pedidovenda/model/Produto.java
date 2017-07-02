@@ -1,12 +1,8 @@
 package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,12 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.algaworks.pedidovenda.service.NegocioException;
 
 @Entity
 public class Produto implements Serializable {
@@ -206,6 +203,24 @@ public class Produto implements Serializable {
 	@Override
 	public String toString() {
 		return nome;
+	}
+
+	public void baixarEstoque(Integer quantidade) {
+//		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
+//
+//		if (novaQuantidade < 0) {
+//			throw new NegocioException("Não ha disponibilidade no estoque de "
+//					+ quantidade + " itens produto " + this.getNome());
+//		}
+//
+//		this.setQuantidadeEstoque(novaQuantidade);
+	}
+
+	public void adicionarEstoque(Integer quantidade) {
+		if(getQuantidade()== null){
+			setQuantidade(0.0);
+		}
+		this.setQuantidade(getQuantidade() + quantidade);
 	}
 	
 	

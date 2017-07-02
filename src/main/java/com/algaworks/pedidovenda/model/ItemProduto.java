@@ -15,18 +15,30 @@ import javax.persistence.TemporalType;
 public class ItemProduto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Long id;
-
-	private Date dataDeValidade;
-	private Double quantidade;
-	private Produto produto;
-	private Usuario usuario;
-	private Movimentacao movimentacao;
-	private ItemMovimentacao itemMovimentacao;
-
+	
 	@Id
 	@GeneratedValue
+	private Long id;
+
+	@Temporal(TemporalType.DATE)
+	private Date dataDeValidade;
+	
+	@Column(precision = 7, scale = 2)
+	private Double quantidade;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_produto", referencedColumnName="id")
+	private Produto produto;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_item_movimentacao")
+	private ItemMovimentacao itemMovimentacao;
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,7 +47,7 @@ public class ItemProduto implements Serializable {
 		this.id = id;
 	}
 
-	@Temporal(TemporalType.DATE)
+	
 	public Date getDataDeValidade() {
 		return dataDeValidade;
 	}
@@ -44,7 +56,7 @@ public class ItemProduto implements Serializable {
 		this.dataDeValidade = dataDeValidade;
 	}
 
-	@Column(precision = 7, scale = 2)
+	
 	public Double getQuantidade() {
 		return quantidade;
 	}
@@ -53,8 +65,7 @@ public class ItemProduto implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "id_produto", referencedColumnName="id")
+	
 	public Produto getProduto() {
 		return produto;
 	}
@@ -63,8 +74,7 @@ public class ItemProduto implements Serializable {
 		this.produto = produto;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -73,18 +83,17 @@ public class ItemProduto implements Serializable {
 		this.usuario = usuario;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "id_movimentacao" )
-	public Movimentacao getMovimentacao() {
-		return movimentacao;
-	}
+//	@ManyToOne
+//	@JoinColumn(name = "id_movimentacao" )
+//	public Movimentacao getMovimentacao() {
+//		return movimentacao;
+//	}
+//
+//	public void setMovimentacao(Movimentacao movimentacao) {
+//		this.movimentacao = movimentacao;
+//	}
 
-	public void setMovimentacao(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "id_item_movimentacao")
+	
 	public ItemMovimentacao getItemMovimentacao() {
 		return itemMovimentacao;
 	}
@@ -116,5 +125,10 @@ public class ItemProduto implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemProduto [dataDeValidade=" + dataDeValidade + ", quantidade=" + quantidade + "]";
 	}
 }

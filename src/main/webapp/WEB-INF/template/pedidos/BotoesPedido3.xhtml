@@ -9,6 +9,8 @@
 			<p:button value="Novo" outcome="/movimentacao/CadastroMovimentacao" />
 			<p:commandButton value="Salvar"
 				action="#{cadastroMovimentacaoBean.salvar}" update="@form" />
+			<p:commandButton value="Baixar"
+				action="#{entradaMovimentacaoBean.adicionarNoEstoque}" process="@this" update="@form" />	
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">

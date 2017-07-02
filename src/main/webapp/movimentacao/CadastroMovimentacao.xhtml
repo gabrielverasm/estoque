@@ -6,7 +6,8 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<f:metadata>
-		<o:viewParam name="movimentacao" value="#{cadastroMovimentacaoBean.movimentacao}" />
+		<o:viewParam name="movimentacao"
+			value="#{cadastroMovimentacaoBean.movimentacao}" />
 		<f:event listener="#{cadastroMovimentacaoBean.inicializar()}"
 			type="preRenderView" />
 	</f:metadata>
@@ -16,7 +17,8 @@
 
 	<ui:define name="corpo">
 		<h:form id="frmCadastroPedido">
-			<h1>#{cadastroMovimentacaoBean.editando ? "Edição de Pedido" : "Novo Pedido"}</h1>
+			<h1>#{cadastroMovimentacaoBean.editando ? "Edição de Pedido" :
+				"Novo Pedido"}</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
 
@@ -24,13 +26,32 @@
 
 			<ui:include src="/WEB-INF/template/pedidos/CapaPedido3.xhtml" />
 
-				<p:tabView style="margin-top: 20px;width:100%">
-					<p:tab title="Itens">
-						<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
-					</p:tab>
-				</p:tabView>
+			<p:tabView style="margin-top: 20px;width:100%" >
+				<p:tab title="Itens">
+					<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
+				</p:tab>
+			</p:tabView>
+			
+			
+			<p:tabView style="margin-top: 20px;width:100%" rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == 'nada'}">
+				<p:tab title="Itens">
+					<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
+				</p:tab>
 
-			<p:growl id="mss" />
+				<p:tab title="Observação">
+					<h:form id="formObs">
+						<h:panelGroup layout="block" style="padding-right: 10px">
+							<p:inputTextarea rows="5" style="width: 100%" value="#{cadastroMovimentacaoBean.movimentacao.observacao}" />
+						</h:panelGroup>
+					</h:form>
+				</p:tab>
+
+				<p:tab title="Pesquisa">
+					<ui:include
+						src="/WEB-INF/template/movimentacao/PesquisaMovimentacao.xhtml" />
+				</p:tab>
+			</p:tabView>
+
 
 
 		</h:form>

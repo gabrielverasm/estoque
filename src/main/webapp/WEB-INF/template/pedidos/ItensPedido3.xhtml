@@ -3,18 +3,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<p:dataTable value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}" var="item"
-		rowIndexVar="linha" id="tabelaItens">
+	<p:dataTable
+		value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}"
+		var="item" rowIndexVar="linha" id="tabelaItens">
 
-		<p:column headerText="Qtde" style="width: 70px">
-			<p:inputText value="#{item.quantidade}" style="width: 40px"
-				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
-				<p:ajax event="change" process="@this"
-					update="tabelaItens"
-					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
-			</p:inputText>
+
+
+		<p:column headerText="Num." style="text-align: center; width: 80px">
+			<h:outputText value="#{item.produto.id}"
+				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
+		<p:column headerText="Cod. de Barras"
+			style="text-align: center; width: 150px">
+			<h:outputText value="#{item.produto.codigoDeBarras}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
 
 		<p:column headerText="Produto"
 			style="text-align: center; width: 250px">
@@ -25,20 +29,44 @@
 				value="#{cadastroMovimentacaoBean.produtoLinhaEditavel}"
 				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
 				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
-				forceSelection="true"
-				rendered="#{not item.produtoAssociado}">
+				forceSelection="true" rendered="#{not item.produtoAssociado}">
 
-				<p:ajax event="itemSelect"
-					update="tabelaItens"
+				<p:ajax event="itemSelect" update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.carregarProdutoLinhaEditavel}" />
 
 			</p:autoComplete>
 		</p:column>
 
+		<p:column headerText="Grupo" style="text-align: center; width: 100px">
+			<h:outputText value="#{item.produto.grupo}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
 
+		<p:column headerText="Unidade" style="text-align: center; width: 80px">
+			<h:outputText value="#{item.produto.unidade}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
 
+		<p:column headerText="Estoque" style="text-align: center; width: 80px">
+			<h:outputText value="#{item.produto.quantidade}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
 
+		<p:column headerText="Qtde" style="width: 70px">
+			<p:inputText value="#{item.quantidade}" style="width: 40px"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
+				<p:ajax event="change" process="@this" update="tabelaItens"
+					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
+			</p:inputText>
+		</p:column>
+
+		<p:column style="text-align: center; width: 60px">
+
+			<p:commandButton icon="ui-icon-minus"
+				title="Remover produto da lista"
+				style="border-left: auto; border-right: auto" />
+		</p:column>
 
 	</p:dataTable>
-	
+
 </ui:composition>

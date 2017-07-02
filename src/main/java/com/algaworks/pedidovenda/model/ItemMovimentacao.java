@@ -143,6 +143,22 @@ public class ItemMovimentacao implements Serializable {
 		return this.getProduto() != null && this.getProduto().getId() != null;
 	}
 
+	public Date getDataDeRecebimento() {
+		return dataDeRecebimento;
+	}
+
+	public void setDataDeRecebimento(Date dataDeRecebimento) {
+		this.dataDeRecebimento = dataDeRecebimento;
+	}
+
+	public Date getDataDeValidade() {
+		return dataDeValidade;
+	}
+
+	public void setDataDeValidade(Date dataDeValidade) {
+		this.dataDeValidade = dataDeValidade;
+	}
+
 //	@Transient
 //	public boolean isEstoqueSuficiente(){
 //		return this.getPedido().isEmitido() ||  this.getProduto().getId() == null
