@@ -2,7 +2,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="movimentacao"
+			value="#{cadastroMovimentacaoBean.movimentacao}" />
+		<f:event listener="#{cadastroMovimentacaoBean.inicializar()}"
+			type="preRenderView" />
+	</f:metadata>
+
 	<div class="ui-fluid">
 		<p:panelGrid columns="4" style="margin-top: 20px">
 
@@ -16,15 +24,20 @@
 			<h:outputText
 				value="#{cadastroMovimentacaoBean.movimentacao.dataCriacao}"
 				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}">
-				<f:convertDateTime pattern="dd/MM/yyyy hh:MM:ss" />
+				<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
+					timeZone="America/Sao_Paulo" />
 			</h:outputText>
 
 			<p:outputLabel value="Tipo:" for="movimentacao" />
-			<p:selectOneButton id="movimentacao" required="true" requiredMessage="Informe a operação"
+			<p:selectOneButton id="movimentacao" required="true"
+				requiredMessage="Informe a operação"
 				value="#{cadastroMovimentacaoBean.movimentacao.operacao}">
 				<f:selectItem itemLabel="Entrada" itemValue="entrada" />
 				<f:selectItem itemLabel="Saída" itemValue="saida" />
+				<p:ajax event="change" process="@this" update="frmCadastroPedido :frmCadastroPedido:tab:tabelaItens:coluna"
+					listener="#{cadastroMovimentacaoBean.mostraCampo()}" />
 			</p:selectOneButton>
+
 
 			<p:outputLabel for="nome" value="Descrição:" />
 			<p:inputText id="nome" size="60" maxlength="150" required="true"
@@ -42,6 +55,16 @@
 			<p:calendar pattern="dd/MM/yyyy" styleClass="calendar-png"
 				locale="pt"
 				value="#{cadastroMovimentacaoBean.movimentacao.prazoDeEntrega}" />
+
+<!-- 			<h:panelGroup id="lbValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
+<!-- 				<p:outputLabel value="Data validade"/> -->
+<!-- 			</h:panelGroup> -->
+			
+<!-- 			<h:panelGroup id="campoValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
+<!-- 				<p:inputText value="#{cadastroMovimentacaoBean.movimentacao.valorTotal}"/> -->
+<!-- 			</h:panelGroup> -->
+			
+			
 		</p:panelGrid>
 	</div>
 </ui:composition>

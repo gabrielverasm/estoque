@@ -7,8 +7,6 @@
 		value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}"
 		var="item" rowIndexVar="linha" id="tabelaItens">
 
-
-
 		<p:column headerText="Num." style="text-align: center; width: 80px">
 			<h:outputText value="#{item.produto.id}"
 				rendered="#{item.produtoAssociado}" />
@@ -47,17 +45,25 @@
 				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
-		<p:column headerText="Estoque" style="text-align: center; width: 80px">
+		<p:column headerText="Estoque" style="text-align: center; width: 60px">
 			<h:outputText value="#{item.produto.quantidade}"
 				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
-		<p:column headerText="Qtde" style="width: 70px">
+		<p:column headerText="Qtde" style="width: 50px">
 			<p:inputText value="#{item.quantidade}" style="width: 40px"
 				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
 				<p:ajax event="change" process="@this" update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
 			</p:inputText>
+		</p:column>
+		
+		<p:column headerText="validade" style="width: 80px" id="coluna"
+		rendered="#{cadastroMovimentacaoBean.flag}">
+			<p:calendar value="#{item.dataDeValidade}" pattern="dd/MM/yyyy" locale="pt" style="width:90%">
+				<p:ajax event="change" process="@this" update="tabelaItens"
+					listener="#{cadastroMovimentacaoBean.atualizarDataValidade(item,linha)}" />
+			</p:calendar>
 		</p:column>
 
 		<p:column style="text-align: center; width: 60px">

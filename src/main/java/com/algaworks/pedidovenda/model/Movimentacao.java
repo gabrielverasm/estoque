@@ -200,7 +200,7 @@ public class Movimentacao implements Serializable {
 	
 	@Transient
 	public boolean isNaoAlteravel() {
-		return !isAlteravel();
+		return !isAlteravel() || isBaixado();
 	}
 //	
 //	@Transient
@@ -212,6 +212,29 @@ public class Movimentacao implements Serializable {
 	public boolean isPendente() {
 		return StatusMovimentacao.PENDENTE.equals(this.getStatusMovimentacao());
 	}
+	
+	@Transient
+	public boolean isBaixado() {
+		return StatusMovimentacao.BAIXADO.equals(this.getStatusMovimentacao());
+	}
+	//para travar o botao de baixa na tela cadastro de movimentação
+	public boolean verifica(){
+		if(this.isNovo() || isNaoAlteravel())
+			return true;
+		
+		return false;
+	}
+	
+	@Transient
+	public boolean isOperacaoEntrada(){
+		boolean retorno = false;
+		
+		if(getOperacao().equals("entrada"))
+			retorno = true;
+		
+		return retorno;
+	}
+	
 	
 	// get and set
 		public Long getId() {

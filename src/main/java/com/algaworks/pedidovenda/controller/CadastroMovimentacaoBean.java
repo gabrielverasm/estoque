@@ -50,6 +50,8 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	@SKU
 	private String sku;
+	
+	private boolean flag;
 
 
 	public CadastroMovimentacaoBean() {
@@ -154,6 +156,16 @@ public class CadastroMovimentacaoBean implements Serializable {
 		this.movimentacao.recalcularValorTotal();
 
 	}
+	
+	public void atualizarDataValidade(ItemMovimentacao item, int linha) {
+
+		if (item.getDataDeValidade() == null) {
+			item.setDataDeValidade(new Date());
+		}
+
+		//this.movimentacao.recalcularValorTotal();
+
+	}
 
 	public void removeItem(ItemMovimentacao item,int linha) {
 
@@ -170,6 +182,18 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public Date dataHoje() {
 		return new Date();
+	}
+	
+	public boolean mostraCampo(){
+		boolean retorno = false;
+		flag = false;
+		if(movimentacao.getOperacao().equals("entrada")){
+		  retorno = true;
+		  flag = true;
+		} 
+		
+		//System.out.println(movimentacao.getOperacao() + " - flag - " + flag);
+		return retorno;
 	}
 
 	// get and set
@@ -199,6 +223,14 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void setSku(String sku) {
 		this.sku = sku;
+	}
+
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 
 }

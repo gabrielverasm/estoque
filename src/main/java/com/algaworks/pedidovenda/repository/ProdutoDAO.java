@@ -80,9 +80,9 @@ public class ProdutoDAO implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public List<Produto> porNome(String nome) {
-		String jpql = "from Produto p where p.nome like :nome ORDER BY nome ASC";
+		String jpql = "from Produto p where upper(p.nome) like :nome ORDER BY nome ASC";
 		Query query = manager.createQuery(jpql, Produto.class);
-		query.setParameter("nome", "%" + nome.toUpperCase() + "%");
+		query.setParameter("nome", "%"+ nome.toUpperCase()+ "%");
 
 		return query.getResultList();
 	}

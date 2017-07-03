@@ -18,7 +18,7 @@
 	<ui:define name="corpo">
 		<h:form id="frmCadastroPedido">
 			<h1>#{cadastroMovimentacaoBean.editando ? "Edição de Pedido" :
-				"Novo Pedido"}</h1>
+				"Nova Movimentação"}</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
 
@@ -33,7 +33,7 @@
 			</p:tabView>
 			
 			
-			<p:tabView style="margin-top: 20px;width:100%" rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == 'nada'}">
+			<p:tabView style="margin-top: 20px;width:100%" id="tab" rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == 'nada'}">
 				<p:tab title="Itens">
 					<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
 				</p:tab>
