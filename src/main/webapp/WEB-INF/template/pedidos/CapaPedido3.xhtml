@@ -29,15 +29,20 @@
 			</h:outputText>
 
 			<p:outputLabel value="Tipo:" for="movimentacao" />
-			<p:selectOneButton id="movimentacao" required="true"
-				requiredMessage="Informe a operação"
-				value="#{cadastroMovimentacaoBean.movimentacao.operacao}">
-				<f:selectItem itemLabel="Entrada" itemValue="entrada" />
-				<f:selectItem itemLabel="Saída" itemValue="saida" />
-				<p:ajax event="change" process="@this" update="frmCadastroPedido :frmCadastroPedido:tab:tabelaItens:coluna"
-					listener="#{cadastroMovimentacaoBean.mostraCampo()}" />
-			</p:selectOneButton>
-
+			<h:panelGroup>
+				<p:outputLabel value="#{cadastroMovimentacaoBean.movimentacao.operacao.toUpperCase()}"
+				rendered="#{cadastroMovimentacaoBean.movimentacao.operacao != null}"/>
+				<p:selectOneButton id="movimentacao" required="true"
+					requiredMessage="Informe a operação" rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == null}"
+					disabled="#{not cadastroMovimentacaoBean.movimentacao.novo}"
+					value="#{cadastroMovimentacaoBean.movimentacao.operacao}">
+					<f:selectItem itemLabel="Entrada" itemValue="entrada" />
+					<f:selectItem itemLabel="Saída" itemValue="saida" />
+					<p:ajax event="change" process="@this"
+						update="frmCadastroPedido :frmCadastroPedido:tab:tabelaItens:coluna"
+						listener="#{cadastroMovimentacaoBean.mostraCampo()}" />
+				</p:selectOneButton>
+			</h:panelGroup>
 
 			<p:outputLabel for="nome" value="Descrição:" />
 			<p:inputText id="nome" size="60" maxlength="150" required="true"
@@ -56,15 +61,15 @@
 				locale="pt"
 				value="#{cadastroMovimentacaoBean.movimentacao.prazoDeEntrega}" />
 
-<!-- 			<h:panelGroup id="lbValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
-<!-- 				<p:outputLabel value="Data validade"/> -->
-<!-- 			</h:panelGroup> -->
-			
-<!-- 			<h:panelGroup id="campoValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
-<!-- 				<p:inputText value="#{cadastroMovimentacaoBean.movimentacao.valorTotal}"/> -->
-<!-- 			</h:panelGroup> -->
-			
-			
+			<!-- 			<h:panelGroup id="lbValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
+			<!-- 				<p:outputLabel value="Data validade"/> -->
+			<!-- 			</h:panelGroup> -->
+
+			<!-- 			<h:panelGroup id="campoValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
+			<!-- 				<p:inputText value="#{cadastroMovimentacaoBean.movimentacao.valorTotal}"/> -->
+			<!-- 			</h:panelGroup> -->
+
+
 		</p:panelGrid>
 	</div>
 </ui:composition>

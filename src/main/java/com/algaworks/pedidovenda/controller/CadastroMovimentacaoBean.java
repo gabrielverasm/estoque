@@ -53,7 +53,13 @@ public class CadastroMovimentacaoBean implements Serializable {
 	
 	private boolean flag;
 
-
+	@Inject
+	private SaidaMovimentacaoBean saidaMovimentacaoBean;
+	
+	@Inject
+	private EntradaMovimentacaoBean entradaMovimentacaoBean;
+	
+	
 	public CadastroMovimentacaoBean() {
 		Limpar();
 	}
@@ -194,6 +200,15 @@ public class CadastroMovimentacaoBean implements Serializable {
 		
 		//System.out.println(movimentacao.getOperacao() + " - flag - " + flag);
 		return retorno;
+	}
+	
+	
+	public void entradaSaida(){
+		if(movimentacao.getOperacao().equals("entrada")){
+			entradaMovimentacaoBean.adicionarNoEstoque();
+		}else{
+			saidaMovimentacaoBean.retirarDoEstoque();
+		}
 	}
 
 	// get and set
