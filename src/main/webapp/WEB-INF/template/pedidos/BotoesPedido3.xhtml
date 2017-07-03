@@ -11,6 +11,8 @@
 				action="#{cadastroMovimentacaoBean.salvar}" update="@form" />
 			<p:commandButton value="Baixar" disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
 				action="#{entradaMovimentacaoBean.adicionarNoEstoque}" process="@this" update="@form" />	
+			<p:commandButton value="retirar estoque" disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
+				action="#{saidaMovimentacaoBean.retirarDoEstoque}" process="@this" update="@form" />	
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">
