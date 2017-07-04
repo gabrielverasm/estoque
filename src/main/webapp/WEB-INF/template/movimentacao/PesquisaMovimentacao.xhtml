@@ -5,6 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="FormPesquisaMov">
+
 		<p:panelGrid id="pngpesquisaMov" columns="4" style="margin-top: 20px"
 			styleClass="ui-panelgrid-blank">
 
@@ -19,7 +20,7 @@
 
 			<p:outputLabel value="Descrição" />
 			<p:inputText size="40"
-				value="#{pesquisaMovimentacoesBean.filtro.nome}"
+				value="#{pesquisaMovimentacoesBean.filtro.descricao}"
 				placeholder="Informe a descrição da movimentação." />
 
 			<p:outputLabel value="Status" />
@@ -44,6 +45,7 @@
 
 				<p:commandButton value="Pesquisar" update="dtbMovimentacao"
 					style="margin-left: 5px;"
+					process="frmCadastroPedido:j_idt61:FormPesquisaMov:pngpesquisaMov @this"
 					action="#{pesquisaMovimentacoesBean.pesquisar}" />
 			</p:outputPanel>
 
@@ -65,7 +67,7 @@
 			</p:column>
 
 			<p:column headerText="Desccrição:" style="text-align: center">
-				<h:outputText value="#{movimentacao.novo}" />
+				<h:outputText value="#{movimentacao.descricao}" />
 			</p:column>
 
 			<p:column headerText="Operação"
@@ -79,8 +81,10 @@
 			</p:column>
 
 			<p:column headerText="Criação:"
-				style="text-align: center; width: 100px">
-				<h:outputText value="#{movimentacao.dataCriacao}" />
+				style="text-align: center; width: 160px">
+				<h:outputText value="#{movimentacao.dataCriacao}">
+					<f:convertDateTime pattern="dd.MM.yy - HH:mm:ss" />
+				</h:outputText>
 			</p:column>
 
 			<p:column style="text-align: center; width: 170px">

@@ -16,7 +16,7 @@ public class MovimentacaoParaPesquisa implements Serializable {
 	private Long numeroAte;
 	private Date dataCriacaoDe;
 	private Date dataCriacaoAte;
-	private String nome;
+	private String descricao;
 	private StatusMovimentacao[] statuses;
 
 	// get and set
@@ -52,12 +52,12 @@ public class MovimentacaoParaPesquisa implements Serializable {
 		this.dataCriacaoAte = dataCriacaoAte;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String nome) {
+		this.descricao = nome;
 	}
 
 	public StatusMovimentacao[] getStatuses() {

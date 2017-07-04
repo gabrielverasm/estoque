@@ -21,6 +21,7 @@ public class PesquisaMovimentacoesBean implements Serializable {
 
 	@Inject
 	private MovimentacaoDAO movimentacaoDAO;
+
 	private MovimentacaoParaPesquisa filtro;
 	private List<Movimentacao> movimentacoesFiltrados;
 

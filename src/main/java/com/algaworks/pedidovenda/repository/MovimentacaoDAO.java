@@ -54,16 +54,15 @@ public class MovimentacaoDAO implements Serializable {
 			criteria.add(Restrictions.le("dataCriacao", filtro.getDataCriacaoAte()));
 		}
 
-		if (StringUtils.isNotBlank(filtro.getNome())) {
-			criteria.add(Restrictions.ilike("v.nome", filtro.getNome(), MatchMode.ANYWHERE));
+		if (StringUtils.isNotBlank(filtro.getDescricao())) {
+			criteria.add(Restrictions.ilike("descricao", filtro.getDescricao(), MatchMode.ANYWHERE));
 		}
 
-		// if (movimentacao.getStatuses() != null &&
-		// movimentacao.getStatuses().length > 0) {
-		// adicionamos uma restrição "in", passando um array de constantes
-		// da ENUM StatusMovimentacao
-		// criteria.add(Restrictions.in("status", movimentacao.getStatuses()));
-		// }
+		if (filtro.getStatuses() != null && filtro.getStatuses().length > 0) {
+			// adicionamos uma restrição "in", passando um array de constantes
+			// da ENUM StatusMovimentacao
+			criteria.add(Restrictions.in("statusMovimentacao", filtro.getStatuses()));
+		}
 
 		return criteria.addOrder(Order.desc("id")).list();
 	}
