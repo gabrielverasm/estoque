@@ -25,58 +25,45 @@ public class MovimentacaoDAO implements Serializable {
 	private EntityManager manager;
 
 	@SuppressWarnings("unchecked")
-	public List<Movimentacao> filtrados(MovimentacaoParaPesquisa movimentacao) {
+	public List<Movimentacao> filtrados(MovimentacaoParaPesquisa filtro) {
 		Session session = this.manager.unwrap(Session.class);
 
-		Criteria criteria = session.createCriteria(Movimentacao.class)
-				.createAlias("cliente", "c") // associação join com cliente e
-												// nomeamos como "c"
-				.createAlias("vendedor", "v"); // associação join com usuario e
-												// nomeamos como "v"
+		Criteria criteria = session.createCriteria(Movimentacao.class);
 
-		if (movimentacao.getNumeroDe() != null) {
+		if (filtro.getNumeroDe() != null) {
 			// id deve ser maior ou igual (ge = greater or equals) a
 			// movimentacao.numeroDe
-			criteria.add(Restrictions.ge("id", movimentacao.getNumeroDe()));
+			criteria.add(Restrictions.ge("id", filtro.getNumeroDe()));
 		}
 
-		if (movimentacao.getNumeroAte() != null) {
+		if (filtro.getNumeroAte() != null) {
 			// id deve ser menor ou igual (le = lower or equals) a
 			// movimentacao.numeroDe
-			criteria.add(Restrictions.le("id", movimentacao.getNumeroAte()));
+			criteria.add(Restrictions.le("id", filtro.getNumeroAte()));
 		}
 
-		if (movimentacao.getDataCriacaoDe() != null) {
+		if (filtro.getDataCriacaoDe() != null) {
 			// id deve ser maior ou igual (ge = greater or equals) a
 			// movimentacao.numeroDe
-			criteria.add(Restrictions.ge("dataCriacao",
-					movimentacao.getDataCriacaoDe()));
+			criteria.add(Restrictions.ge("dataCriacao", filtro.getDataCriacaoDe()));
 		}
 
-		if (movimentacao.getDataCriacaoAte() != null) {
+		if (filtro.getDataCriacaoAte() != null) {
 			// id deve ser menor ou igual (le = lower or equals) a
 			// movimentacao.numeroDe
-			criteria.add(Restrictions.le("dataCriacao",
-					movimentacao.getDataCriacaoAte()));
+			criteria.add(Restrictions.le("dataCriacao", filtro.getDataCriacaoAte()));
 		}
 
-		if (StringUtils.isNotBlank(movimentacao.getNomeCliente())) {
-			// acessamos o nome do cliente associado ao movimentacao pelo alias "c"
-			criteria.add(Restrictions.ilike("c.nome", movimentacao.getNomeCliente(),
-					MatchMode.ANYWHERE));
+		if (StringUtils.isNotBlank(filtro.getNome())) {
+			criteria.add(Restrictions.ilike("v.nome", filtro.getNome(), MatchMode.ANYWHERE));
 		}
 
-		if (StringUtils.isNotBlank(movimentacao.getNomeVendedor())) {
-			// acessamos o nome do vendedor associado ao movimentacao pelo alias "v"
-			criteria.add(Restrictions.ilike("v.nome", movimentacao.getNomeVendedor(),
-					MatchMode.ANYWHERE));
-		}
-
-	//	if (movimentacao.getStatuses() != null && movimentacao.getStatuses().length > 0) {
-			// adicionamos uma restrição "in", passando um array de constantes
-			// da ENUM StatusMovimentacao
-//			criteria.add(Restrictions.in("status", movimentacao.getStatuses()));
-//		}
+		// if (movimentacao.getStatuses() != null &&
+		// movimentacao.getStatuses().length > 0) {
+		// adicionamos uma restrição "in", passando um array de constantes
+		// da ENUM StatusMovimentacao
+		// criteria.add(Restrictions.in("status", movimentacao.getStatuses()));
+		// }
 
 		return criteria.addOrder(Order.desc("id")).list();
 	}
@@ -84,17 +71,14 @@ public class MovimentacaoDAO implements Serializable {
 	public Movimentacao porId(Long id) {
 		return this.manager.find(Movimentacao.class, id);
 	}
-	
+
 	public Movimentacao porId(Movimentacao movimentacao) {
 		return this.manager.find(Movimentacao.class, movimentacao.getId());
 	}
-
-	
 
 	// crud
 	public Movimentacao salvar(Movimentacao movimentacao) {
 		return manager.merge(movimentacao);
 	}
-
 
 }

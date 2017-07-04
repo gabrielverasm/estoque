@@ -71,7 +71,5 @@ public class MovimentacaoService implements Serializable {
 		return movimentacao;
 
 	}
-	
-	
-	
+
 }
