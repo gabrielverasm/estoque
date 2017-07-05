@@ -10,19 +10,15 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.algaworks.pedidovenda.model.ItemMovimentacao;
 import com.algaworks.pedidovenda.model.Movimentacao;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.model.Usuario;
 import com.algaworks.pedidovenda.service.MovimentacaoService;
 import com.algaworks.pedidovenda.service.ProdutoService;
-import com.algaworks.pedidovenda.service.UsuarioService;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 import com.algaworks.pedidovenda.validation.MovimentacaoAlteradoEvent;
 import com.algaworks.pedidovenda.validation.MovimentacaoEdicao;
-import com.algaworks.pedidovenda.validation.SKU;
 
 @Named
 @ViewScoped
@@ -40,26 +36,18 @@ public class CadastroMovimentacaoBean implements Serializable {
 	private MovimentacaoService movimentacaoService;
 
 	@Inject
-	private UsuarioService usuarioService;
-
-
-	@Inject
 	private ProdutoService produtoService;
 
 	private Produto produtoLinhaEditavel;
 
-	@SKU
-	private String sku;
-	
 	private boolean flag;
 
 	@Inject
 	private SaidaMovimentacaoBean saidaMovimentacaoBean;
-	
+
 	@Inject
 	private EntradaMovimentacaoBean entradaMovimentacaoBean;
-	
-	
+
 	public CadastroMovimentacaoBean() {
 		Limpar();
 	}
@@ -85,15 +73,14 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-//			this.vendedores = usuarioService.listaVendedores();
+			// this.vendedores = usuarioService.listaVendedores();
 
 			this.movimentacao.adicionaItemVazio();
 
-		//	this.recalcularMovimentacao();
+			// this.recalcularMovimentacao();
 
 		}
 	}
-
 
 	public boolean isEditando() {
 		return this.movimentacao.getId() != null;
@@ -118,11 +105,10 @@ public class CadastroMovimentacaoBean implements Serializable {
 				FacesUtil.AvisoMessage("Ja existe um item no movimentacao com o produto informado");
 			} else {
 				item.setProduto(this.produtoLinhaEditavel);
-				//item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
+				// item.setValorUnitario(this.produtoLinhaEditavel.getValorUnitario());
 
 				this.movimentacao.adicionaItemVazio();
 				this.produtoLinhaEditavel = null;
-				this.sku = null;
 				this.movimentacao.recalcularValorTotal();
 			}
 		}
@@ -141,14 +127,6 @@ public class CadastroMovimentacaoBean implements Serializable {
 		return existeItem;
 	}
 
-	public void carregarProdutoPorSKU() {
-		if (StringUtils.isNotEmpty(this.sku)) {
-			this.produtoLinhaEditavel = this.produtoService.porSku(this.sku);
-			this.carregarProdutoLinhaEditavel();
-		}
-
-	}
-
 	public void atualizarQuantidade(ItemMovimentacao item, int linha) {
 
 		if (item.getQuantidade() < 1) {
@@ -162,21 +140,21 @@ public class CadastroMovimentacaoBean implements Serializable {
 		this.movimentacao.recalcularValorTotal();
 
 	}
-	
+
 	public void atualizarDataValidade(ItemMovimentacao item, int linha) {
 
 		if (item.getDataDeValidade() == null) {
 			item.setDataDeValidade(new Date());
 		}
 
-		//this.movimentacao.recalcularValorTotal();
+		// this.movimentacao.recalcularValorTotal();
 
 	}
 
-	public void removeItem(ItemMovimentacao item,int linha) {
+	public void removeItem(ItemMovimentacao item, int linha) {
 
 		this.getMovimentacao().getItensMovimentacao().remove(linha);
-		//this.getMovimentacao().adicionaItemVazio();
+		// this.getMovimentacao().adicionaItemVazio();
 		this.movimentacao.recalcularValorTotal();
 
 	}
@@ -185,28 +163,26 @@ public class CadastroMovimentacaoBean implements Serializable {
 		this.movimentacao = event.getMovimentacao();
 	}
 
-
 	public Date dataHoje() {
 		return new Date();
 	}
-	
-	public boolean mostraCampo(){
+
+	public boolean mostraCampo() {
 		boolean retorno = false;
 		flag = false;
-		if(movimentacao.getOperacao().equals("entrada")){
-		  retorno = true;
-		  flag = true;
-		} 
-		
-		//System.out.println(movimentacao.getOperacao() + " - flag - " + flag);
+		if (movimentacao.getOperacao().equals("entrada")) {
+			retorno = true;
+			flag = true;
+		}
+
+		// System.out.println(movimentacao.getOperacao() + " - flag - " + flag);
 		return retorno;
 	}
-	
-	
-	public void entradaSaida(){
-		if(movimentacao.getOperacao().equals("entrada")){
+
+	public void entradaSaida() {
+		if (movimentacao.getOperacao().equals("entrada")) {
 			entradaMovimentacaoBean.adicionarNoEstoque();
-		}else{
+		} else {
 			saidaMovimentacaoBean.retirarDoEstoque();
 		}
 	}
@@ -230,14 +206,6 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void setProdutoLinhaEditavel(Produto produtoLinhaEditavel) {
 		this.produtoLinhaEditavel = produtoLinhaEditavel;
-	}
-
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
 	}
 
 	public boolean isFlag() {

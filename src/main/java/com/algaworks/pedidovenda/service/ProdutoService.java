@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.ProdutoDAO;
 import com.algaworks.pedidovenda.repository.filter.ProdutoParaPesquisa;
@@ -22,12 +20,6 @@ public class ProdutoService implements Serializable {
 	
 	@Transactional
 	public Produto salvar(Produto produto) {
-	//	Produto produtoExistente = produtos.porSku(produto.getSku());
-		
-//		if (produtoExistente != null && !produtoExistente.equals(produto)) {
-//			throw new NegocioException("Já existe um produto com o SKU informado.");
-//		}
-//		
 		return produtos.guardar(produto);
 	}
 	
@@ -43,10 +35,10 @@ public class ProdutoService implements Serializable {
 	public List<Produto> filtrados(ProdutoParaPesquisa filtro) {
 		List<Produto> lista = null;
 		
-		if(StringUtils.isNotBlank(filtro.getSku()) && StringUtils.isNotBlank(filtro.getNome())){
-			FacesUtil.AvisoMessage("Preencha apenas um dos campos abaixo");
-			return null;
-		}
+//		if(StringUtils.isNotBlank(filtro.getSku()) && StringUtils.isNotBlank(filtro.getNome())){
+//			FacesUtil.AvisoMessage("Preencha apenas um dos campos abaixo");
+//			return null;
+//		}
 		
 		lista = produtos.filtrados(filtro);
 		

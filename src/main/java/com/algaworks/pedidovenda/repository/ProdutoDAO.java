@@ -62,9 +62,6 @@ public class ProdutoDAO implements Serializable {
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Produto.class);
 
-		if (StringUtils.isNotBlank(filtro.getSku())) {
-			criteria.add(Restrictions.eq("sku", filtro.getSku()));
-		}
 
 		if (StringUtils.isNotBlank(filtro.getNome())) {
 			criteria.add(Restrictions.ilike("nome", filtro.getNome().toUpperCase(),

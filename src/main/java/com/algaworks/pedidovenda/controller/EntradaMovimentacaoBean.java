@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import com.algaworks.pedidovenda.model.Movimentacao;
 import com.algaworks.pedidovenda.service.EntradaMovimentacao;
-import com.algaworks.pedidovenda.service.MovimentacaoService;
 import com.algaworks.pedidovenda.validation.MovimentacaoAlteradoEvent;
 import com.algaworks.pedidovenda.validation.MovimentacaoEdicao;
 
