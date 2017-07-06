@@ -13,9 +13,11 @@ import javax.inject.Named;
 import com.algaworks.pedidovenda.model.ItemMovimentacao;
 import com.algaworks.pedidovenda.model.Movimentacao;
 import com.algaworks.pedidovenda.model.Produto;
+import com.algaworks.pedidovenda.model.StatusMovimentacao;
 import com.algaworks.pedidovenda.model.Usuario;
 import com.algaworks.pedidovenda.service.MovimentacaoService;
 import com.algaworks.pedidovenda.service.ProdutoService;
+import com.algaworks.pedidovenda.util.jpa.Transactional;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 import com.algaworks.pedidovenda.validation.MovimentacaoAlteradoEvent;
 import com.algaworks.pedidovenda.validation.MovimentacaoEdicao;
@@ -73,17 +75,21 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-			// this.vendedores = usuarioService.listaVendedores();
 
 			this.movimentacao.adicionaItemVazio();
 
-			// this.recalcularMovimentacao();
-
+		}
+		if (isBaixado()) {
+			produtoLinhaEditavel = null;
 		}
 	}
 
 	public boolean isEditando() {
 		return this.movimentacao.getId() != null;
+	}
+
+	public boolean isBaixado() {
+		return this.movimentacao.getStatusMovimentacao() == StatusMovimentacao.BAIXADO;
 	}
 
 	public void recalcularMovimentacao() {
@@ -150,7 +156,7 @@ public class CadastroMovimentacaoBean implements Serializable {
 		// this.movimentacao.recalcularValorTotal();
 
 	}
-
+	@Transactional
 	public void removeItem(ItemMovimentacao item, int linha) {
 
 		this.getMovimentacao().getItensMovimentacao().remove(linha);

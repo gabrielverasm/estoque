@@ -12,7 +12,8 @@
 	</f:metadata>
 
 	<div class="ui-fluid">
-		<p:panelGrid columns="4" style="margin-top: 20px">
+		<p:panelGrid columns="4" style=" margin: auto; margin-top: 20px;"
+			styleClass="ui-panelgrid-blank">
 
 			<p:outputLabel value="Número"
 				rendered="#{cadastroMovimentacaoBean.movimentacao.existente}" />
@@ -30,14 +31,16 @@
 
 			<p:outputLabel value="Tipo:" for="movimentacao" />
 			<h:panelGroup>
-				<p:outputLabel value="#{cadastroMovimentacaoBean.movimentacao.operacao.toUpperCase()}"
-				rendered="#{cadastroMovimentacaoBean.movimentacao.operacao != null}"/>
+				<p:outputLabel
+					value="#{cadastroMovimentacaoBean.movimentacao.operacao}"
+					rendered="#{cadastroMovimentacaoBean.movimentacao.operacao != null}" />
 				<p:selectOneButton id="movimentacao" required="true"
-					requiredMessage="Informe a operação" rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == null}"
+					requiredMessage="Informe a operação"
+					rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == null}"
 					disabled="#{not cadastroMovimentacaoBean.movimentacao.novo}"
 					value="#{cadastroMovimentacaoBean.movimentacao.operacao}">
-					<f:selectItem itemLabel="Entrada" itemValue="entrada" />
-					<f:selectItem itemLabel="Saída" itemValue="saida" />
+					<f:selectItem itemLabel="Entrada" itemValue="Entrada" />
+					<f:selectItem itemLabel="Saída" itemValue="Saída" />
 					<p:ajax event="change" process="@this"
 						update="frmCadastroPedido :frmCadastroPedido:tab:tabelaItens:coluna"
 						listener="#{cadastroMovimentacaoBean.mostraCampo()}" />

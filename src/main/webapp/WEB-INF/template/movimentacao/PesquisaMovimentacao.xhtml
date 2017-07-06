@@ -87,9 +87,11 @@
 			</p:column>
 
 			<p:column style="text-align: center; width: 45px">
-				<p:commandButton icon="ui-icon-pencil"
-					title="Remover produto da lista"
-					style="border-left: auto; border-right: auto" />
+				<p:button icon="ui-icon-pencil" title="Editar movimentação"
+					style="border-left: auto; border-right: auto"
+					outcome="/movimentacao/CadastroMovimentacao.xhtml">
+					<f:param name="movimentacao" value="#{movimentacao.id}" />
+				</p:button>
 			</p:column>
 
 		</p:dataTable>
