@@ -21,13 +21,13 @@
 				Movimentação" : "Nova Movimentação"}</h1>
 
 
-			<ui:include src="/WEB-INF/template/pedidos/BotoesPedido3.xhtml" />
+			<ui:include src="/WEB-INF/template/movimentacao/BotoesMovimentacao.xhtml" />
 
-			<ui:include src="/WEB-INF/template/pedidos/CapaPedido3.xhtml" />
+			<ui:include src="/WEB-INF/template/movimentacao/CapaMovimentacao.xhtml" />
 
 			<p:tabView style="margin-top: 20px;width:100%">
 				<p:tab title="Itens">
-					<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
+					<ui:include src="/WEB-INF/template/movimentacao/ItensMovimentacao.xhtml" />
 				</p:tab>
 				<p:tab title="Observação">
 					<h:form id="formObs">
@@ -47,7 +47,7 @@
 			<p:tabView style="margin-top: 20px;width:100%" id="tab"
 				rendered="#{cadastroMovimentacaoBean.movimentacao.operacao == 'nada'}">
 				<p:tab title="Itens">
-					<ui:include src="/WEB-INF/template/pedidos/ItensPedido3.xhtml" />
+					<ui:include src="/WEB-INF/template/movimentacao/ItensMovimentacao.xhtml" />
 				</p:tab>
 
 				<p:tab title="Observação">
