@@ -7,19 +7,26 @@
 	<p:toolbar style="margin-top: 20px">
 		<p:toolbarGroup>
 			<p:button value="Novo" outcome="/movimentacao/CadastroMovimentacao" />
-			<p:commandButton value="Salvar" update="@form" 
-				action="#{cadastroMovimentacaoBean.salvar}" />
+			<p:commandButton value="Salvar"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.baixado}"
+				action="#{cadastroMovimentacaoBean.salvar}" update="@form" />
+			<p:commandButton value="Baixar"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
+				action="#{cadastroMovimentacaoBean.entradaSaida}" update="@form" />
+			<p:commandButton value="Baixar" rendered="1=2"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
+				action="#{entradaMovimentacaoBean.adicionarNoEstoque}"
+				process="@this" update="@form" />
+			<p:commandButton value="retirar estoque" rendered="1=2"
+				disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
+				action="#{saidaMovimentacaoBean.retirarDoEstoque}" process="@this"
+				update="@form" />
 		</p:toolbarGroup>
 
 		<p:toolbarGroup align="right">
 
-			<p:commandButton value="Baixar" title="Baixar Movimentações." />
-
-			<p:commandButton value="Cancelar" title="Cancelar Movimentações." />
-
 			<p:separator />
 
-			<p:button value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
 		</p:toolbarGroup>
 	</p:toolbar>
 
