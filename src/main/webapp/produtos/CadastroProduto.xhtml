@@ -19,6 +19,7 @@
 			<h1>#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto'
 				: 'Novo Produto'}</h1>
 
+			<p:messages autoUpdate="true" closable="true" id="msg" />
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -31,22 +32,23 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<div class="pngdados">
-				<p:panelGrid columns="2" id="painel" styleClass="ui-panelgrid-blank">
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" id="painel"
+					columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
 
 					<p:outputLabel value="Id:" />
 					<p:inputNumber emptyValue="sign" id="id" minValue="0"
 						readonly="true" size="1" value="#{cadastroProdutoBean.produto.id}" />
 
 					<p:outputLabel for="status" value="Status" />
-					<p:selectOneMenu id="status"
-						value="#{cadastroProdutoBean.produto.status}">
+					<p:selectOneMenu id="status" value="#{cadastroProdutoBean.produto.status}">
 						<f:selectItem itemLabel="Selecione." />
 						<f:selectItems value="#{cadastroProdutoBean.statusProduto}"
 							var="statusProduto" itemValue="#{statusProduto}"
 							itemLabel="#{statusProduto.descricao}" />
 					</p:selectOneMenu>
-
+					
 
 					<p:outputLabel for="codigoDeBarra" value="Cód. de Barras:" />
 					<p:inputText id="codigoDeBarra"
@@ -55,7 +57,7 @@
 					</p:inputText>
 
 					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" size="40" maxlength="100" required="true"
+					<p:inputText id="nome" size="40" maxlength="100"
 						value="#{cadastroProdutoBean.produto.nome}" />
 
 					<p:outputLabel value="Qtd. Diária: " />
@@ -78,8 +80,9 @@
 					<p:selectOneMenu id="grupo"
 						value="#{cadastroProdutoBean.produto.grupo}">
 						<f:selectItem itemLabel="Selecione." />
-						<f:selectItems value="#{cadastroProdutoBean.grupos}" var="grupo"
-							itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
+						<f:selectItems value="#{cadastroProdutoBean.grupos}"
+							var="grupo" itemValue="#{grupo}"
+							itemLabel="#{grupo.descricao}" />
 
 					</p:selectOneMenu>
 
