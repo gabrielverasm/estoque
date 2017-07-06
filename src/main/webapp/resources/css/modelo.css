@@ -75,12 +75,8 @@ h1 {
 	padding: 5px 0;
 }
 
-.ui-widget-content {
-	background-color: #1AA095 !important;
-}
-
 .ui-menu.ui-menubar {
-	background-color: none !important;
+	background-color: #1AA095 !important;
 }
 
 .ui-menubar {

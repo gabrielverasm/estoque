@@ -26,9 +26,6 @@
 					<p:commandButton value="Salvar" id="botaoSalvar"
 						action="#{cadastroProdutoBean.salvar}" update="@form" />
 				</p:toolbarGroup>
-				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos" />
-				</p:toolbarGroup>
 			</p:toolbar>
 
 			<div class="pngdados">
@@ -83,9 +80,12 @@
 
 					</p:selectOneMenu>
 
-
-
 				</p:panelGrid>
+
+				<p:separator style="margin-top: 10px" />
+				
+				<ui:include src="/WEB-INF/template/produto/PesquisaProduto.xhtml" />
+			
 			</div>
 		</h:form>
 	</ui:define>
