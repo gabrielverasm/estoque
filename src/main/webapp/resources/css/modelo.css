@@ -50,6 +50,12 @@ h1 {
 	padding-bottom: 5px;
 }
 
+#usuariologado {
+	position: absolute;
+	padding-top: 15px;
+	padding-right: 16px;
+}
+
 /* Alterando css do menubar - Inicio */
 .ui-menu.ui-menubar {
 	padding-right: 10px !important;

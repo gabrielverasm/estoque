@@ -5,10 +5,14 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+	<http pattern="/javax.faces.resource/**" security="none" />
+
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/produtos/**" access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
-		<intercept-url pattern="/movimentacao/**" access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
+		<intercept-url pattern="/produtos/**"
+			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
+		<intercept-url pattern="/movimentacao/**"
+			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
 		<intercept-url pattern="/**" access="denyAll" />
 	</http>
 
