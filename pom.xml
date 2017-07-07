@@ -31,11 +31,17 @@
 		</dependency>
 
 
-		<!-- biblioteca de Componentes -->
+		<!-- Primefaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
 		</dependency>
 
 		<!-- log4j -->
@@ -126,12 +132,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.primefaces.themes</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>1.0.10</version>
-		</dependency>
-
-		<dependency>
 			<groupId>net.sf.barcode4j</groupId>
 			<artifactId>barcode4j-light</artifactId>
 			<version>2.0</version>
@@ -163,11 +163,12 @@
 	</dependencies>
 
 	<repositories>
+		<!-- Repositório Primefaces -->
 		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
+		<id>prime-repo</id>
+		<name>PrimeFaces Maven Repository</name>
+		<url>http://repository.primefaces.org</url>
+		<layout>default</layout>
 		</repository>
 	</repositories>
 
