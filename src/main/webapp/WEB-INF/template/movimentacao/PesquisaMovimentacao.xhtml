@@ -55,17 +55,17 @@
 		</p:panelGrid>
 
 		<p:dataTable id="dtbMovimentacao" reflow="true" var="movimentacao"
-			style="margin-top: 10px"
+			style="margin-top: 10px" sortBy="#{movimentacao.id}"
 			value="#{pesquisaMovimentacoesBean.movimentacoesFiltrados}"
 			emptyMessage="Nenhuma movimentação encontrada." rows="5"
 			paginator="true" paginatorAlwaysVisible="false"
 			paginatorPosition="bottom">
 
-			<p:column headerText="Número" style="text-align: center; width: 80px">
+			<p:column headerText="Número" style="text-align: center; width: 80px" sortBy="#{movimentacao.id}">
 				<h:outputText value="#{movimentacao.id}" />
 			</p:column>
 
-			<p:column headerText="Desccrição:" style="text-align: center">
+			<p:column headerText="Desccrição:" style="text-align: center" sortBy="#{movimentacao.descricao}">
 				<h:outputText value="#{movimentacao.descricao}" />
 			</p:column>
 
@@ -75,12 +75,12 @@
 			</p:column>
 
 			<p:column headerText="Status"
-				style="text-align: center; width: 100px">
+				style="text-align: center; width: 100px" sortBy="#{movimentacao.statusMovimentacao}">
 				<h:outputText value="#{movimentacao.statusMovimentacao.descricao}" />
 			</p:column>
 
 			<p:column headerText="Criação:"
-				style="text-align: center; width: 160px">
+				style="text-align: center; width: 160px" sortBy="#{movimentacao.dataCriacao}">
 				<h:outputText value="#{movimentacao.dataCriacao}">
 					<f:convertDateTime pattern="dd.MM.yy - HH:mm:ss" />
 				</h:outputText>

@@ -118,6 +118,12 @@ ul li.ui-menuitem-active>a {
 	padding: 0px !important;
 }
 /* Customiza TabView - fim */
+/* tamanho dos input de calendário */
+.ui-fluid .ui-calendar, .ui-fluid .ui-calendar input {
+	width: 150px !important;
+}
+
+
 .ajax-status {
 	position: absolute;
 	top: 100px;

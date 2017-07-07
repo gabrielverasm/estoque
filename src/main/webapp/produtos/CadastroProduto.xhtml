@@ -12,10 +12,9 @@
 
 		<f:metadata>
 			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
-
 		</f:metadata>
 
-		<h:form>
+		<h:form id="frmProduto">
 			<h1>#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto'
 				: 'Novo Produto'}</h1>
 
@@ -29,11 +28,15 @@
 			</p:toolbar>
 
 			<div class="pngdados">
-				<p:panelGrid columns="2" id="painel" styleClass="ui-panelgrid-blank">
+				<p:panelGrid columns="4" id="painel" styleClass="ui-panelgrid-blank">
 
 					<p:outputLabel value="Id:" />
 					<p:inputNumber emptyValue="sign" id="id" minValue="0"
 						readonly="true" size="1" value="#{cadastroProdutoBean.produto.id}" />
+
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" size="40" maxlength="100" required="true"
+						value="#{cadastroProdutoBean.produto.nome}" />
 
 					<p:outputLabel for="status" value="Status" />
 					<p:selectOneMenu id="status"
@@ -51,16 +54,16 @@
 						<f:convertNumber maxIntegerDigits="128" />
 					</p:inputText>
 
-					<p:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" size="40" maxlength="100" required="true"
-						value="#{cadastroProdutoBean.produto.nome}" />
-
-					<p:outputLabel value="Qtd. Diária: " />
-					<p:inputNumber minValue="0" size="5"
+					<p:outputLabel for="qtdDiaria" value="Qtd. Diária: " />
+					<p:inputNumber id="qtdDiaria" minValue="0" size="5"
+						maxValue="99999" required="true"
+						requiredMessage="Necessário informar a quantiade diária."
 						value="#{cadastroProdutoBean.produto.qtdDiaria}" />
 
-					<p:outputLabel value="Estoque Mínimo: " />
-					<p:inputNumber minValue="0" size="5"
+					<p:outputLabel for="estoqueMin" value="Estoque Mínimo: " />
+					<p:inputNumber id="estoqueMin" minValue="0" size="5"
+						maxValue="99999" required="true"
+						requiredMessage="Necessário informar o estoque mínimo."
 						value="#{cadastroProdutoBean.produto.estoqueMinimo}" />
 
 					<p:outputLabel value="Unidade:" />
@@ -72,7 +75,8 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel for="grupo" value="Grupo:" />
-					<p:selectOneMenu id="grupo"
+					<p:selectOneMenu id="grupo" required="true"
+						requiredMessage="Necessário informar o grupo."
 						value="#{cadastroProdutoBean.produto.grupo}">
 						<f:selectItem itemLabel="Selecione." />
 						<f:selectItems value="#{cadastroProdutoBean.grupos}" var="grupo"
@@ -82,10 +86,9 @@
 
 				</p:panelGrid>
 
-				<p:separator style="margin-top: 10px" />
-				
+
 				<ui:include src="/WEB-INF/template/produto/PesquisaProduto.xhtml" />
-			
+
 			</div>
 		</h:form>
 	</ui:define>

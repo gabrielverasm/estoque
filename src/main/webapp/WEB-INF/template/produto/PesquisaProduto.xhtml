@@ -6,75 +6,91 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<h:form id="frm">
+	<h:form id="frmPesquisa">
 
-		<div class="tem nao">
-			<p:panelGrid columns="3" id="painel"
-				style="width: 100%; margin-top: 20px">
-				<p:commandButton value="Pesquisar" title="Pesquisar produto"
-					action="#{pesquisaProdutosBean.pesquisar}" update="@form" />
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60"
-					value="#{pesquisaProdutosBean.filtro.nome}" styleClass="up" />
+		<p:tabView style="margin-top: 10px;" id="tabView">
 
-			</p:panelGrid>
+			<p:tab title="Pesquisa">
+				<p:panelGrid columns="3" id="pngPesq"
+					styleClass="ui-panelgrid-blank"
+					style="margin-left: auto; margin-right: auto; margin-top: 20px">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" size="60"
+						value="#{pesquisaProdutosBean.filtro.nome}" />
+
+					<p:commandButton value="Pesquisar" title="Pesquisar produto"
+						process="nome @this" action="#{pesquisaProdutosBean.pesquisar}"
+						update=":frmProduto:frmPesquisa:tabView:dtbPesquisa" />
+
+				</p:panelGrid>
 
 
-			<p:dataTable id="produtosTable" reflow="true"
-				value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
-				style="margin-top: 20px;" emptyMessage="Nenhum produto encontrado."
-				rows="5" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+				<p:dataTable id="dtbPesquisa" reflow="true"
+					value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
+					style="margin-top: 20px;" emptyMessage="Nenhum produto encontrado."
+					rows="5" paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom" sortBy="#{produto.id}">
 
-				<p:column headerText="Id" style="width: 50px;"
-					sortBy="#{produto.id}">
-					<h:outputText value="#{produto.id}" />
-				</p:column>
+					<p:column headerText="Id" style="width: 32px;"
+						sortBy="#{produto.id}">
+						<h:outputText value="#{produto.id}" />
+					</p:column>
 
-				<p:column headerText="Código de barras" style="width: 120px"
-					sortBy="#{produto.codigoDeBarras}">
-					<h:outputText value="#{produto.codigoDeBarras}" />
-				</p:column>
+					<p:column headerText="Cód. de barras" style="width: 120px"
+						sortBy="#{produto.codigoDeBarras}">
+						<h:outputText value="#{produto.codigoDeBarras}" />
+					</p:column>
 
-				<p:column headerText="Nome" sortBy="#{produto.nome}">
-					<h:outputText value="#{produto.nome}" />
-				</p:column>
+					<p:column headerText="Nome" sortBy="#{produto.nome}">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
 
-				<p:column headerText="Grupo" style="width: 100px"
-					sortBy="#{produto.grupo}">
-					<h:outputText value="#{produto.grupo}" />
-				</p:column>
+					<p:column headerText="Grupo" style="width: 100px"
+						sortBy="#{produto.grupo}">
+						<h:outputText value="#{produto.grupo}" />
+					</p:column>
 
-				<p:column headerText="status" style="width: 100px"
-					sortBy="#{produto.status}">
-					<h:outputText value="#{produto.status}" />
-				</p:column>
+					<p:column headerText="Qtd." style="width: 50px"
+						sortBy="#{produto.quantidade}">
+						<h:outputText value="#{produto.quantidade}" />
+					</p:column>
 
-				<p:column style="width: 100px;">
-					<p:button icon="ui-icon-pencil" title="Editar"
-						outcome="/produtos/CadastroProduto">
-						<f:param name="produto" value="#{produto.id}" />
-					</p:button>
+					<p:column headerText="Q. Diária" style="width: 76px"
+						sortBy="#{produto.qtdDiaria}">
+						<h:outputText value="#{produto.qtdDiaria}" />
+					</p:column>
 
-					<p:commandButton icon="ui-icon-trash" title="Excluir Produto"
-						process="@this" update=":frm:exclusaoDialog"
-						oncomplete="PF('confirmacaoExclusao').show()">
-						<f:setPropertyActionListener
-							target="#{pesquisaProdutosBean.produtoSelecionado}"
-							value="#{produto}" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
+					<p:column style="width: 70px;">
+						<p:button icon="ui-icon-pencil" title="Editar"
+							outcome="/produtos/CadastroProduto">
+							<f:param name="produto" value="#{produto.id}" />
+						</p:button>
 
-			<p:confirmDialog header="Exclusão de produto"
-				message="Tem certeza que deseja excluir o produto #{pesquisaProdutosBean.produtoSelecionado}?"
-				widgetVar="confirmacaoExclusao" id="exclusaoDialog">
-				<p:button value="Não"
-					onclick="PF('confirmacaoExclusao').hide(); return false;" />
-				<p:commandButton value="Sim"
-					oncomplete="PF('confirmacaoExclusao').hide();"
-					action="#{pesquisaProdutosBean.remover}" update="produtosTable" />
-			</p:confirmDialog>
-		</div>
+						<p:commandButton icon="ui-icon-trash" title="Excluir Produto"
+							process="@this" update=":frmProduto:frmPesquisa:exclusaoDialog"
+							oncomplete="PF('confirmacaoExclusao').show()">
+							<f:setPropertyActionListener
+								target="#{pesquisaProdutosBean.produtoSelecionado}"
+								value="#{produto}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:tab>
+
+			<p:tab title="Envio Alertas (e-mail)" disabled="true">
+			</p:tab>
+		</p:tabView>
+
+		<p:confirmDialog header="Exclusão de produto"
+			message="Tem certeza que deseja excluir o produto de número #{pesquisaProdutosBean.produtoSelecionado.id}?"
+			widgetVar="confirmacaoExclusao" id="exclusaoDialog">
+			<p:button value="Não"
+				onclick="PF('confirmacaoExclusao').hide(); return false;" />
+			<p:commandButton value="Sim"
+				oncomplete="PF('confirmacaoExclusao').hide();"
+				action="#{pesquisaProdutosBean.remover}"
+				update=":frmProduto:frmPesquisa:tabView:dtbPesquisa" />
+		</p:confirmDialog>
 	</h:form>
 </ui:composition>
