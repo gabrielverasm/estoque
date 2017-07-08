@@ -5,26 +5,32 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
+
+	<beans:bean id="appUserDetailService"
+		class="com.algaworks.pedidovenda.security.AppUserDetailsService" />
+
 	<http pattern="/javax.faces.resource/**" security="none" />
-	<http pattern="/resources/images/**" security="none" />
+
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
 		<intercept-url pattern="/produtos/**"
 			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
 		<intercept-url pattern="/movimentacao/**"
 			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
-		<intercept-url pattern="/usuarios/**"
-			access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/usuarios/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/**" access="denyAll" />
 	</http>
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="admin" password="admin" authorities="ADMINISTRADOR" />
-				<user name="estoque" password="12345" authorities="ESTOQUE" />
-			</user-service>
+		<authentication-provider user-service-ref="appUserDetailService">
 		</authentication-provider>
 	</authentication-manager>
+
+	<!-- <password-encoder hash="md5" /> -->
+	<!-- <authentication-provider> -->
+	<!-- <user-service> -->
+	<!-- <user name="admin" password="admin" authorities="ADMINISTRADOR" /> -->
+	<!-- <user name="estoque" password="12345" authorities="ESTOQUE" /> -->
+	<!-- </user-service> -->
 
 </beans:beans>

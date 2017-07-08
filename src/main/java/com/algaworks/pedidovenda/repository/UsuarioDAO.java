@@ -12,9 +12,6 @@ import com.algaworks.pedidovenda.model.Usuario;
 
 public class UsuarioDAO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -22,13 +19,6 @@ public class UsuarioDAO implements Serializable {
 
 	public Usuario porId(Long id) {
 		return this.manager.find(Usuario.class, id);
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Usuario> listarVendedores() {
-		String jpql = "from Usuario ORDER BY nome ASC";
-		Query query = manager.createQuery(jpql, Usuario.class);
-		return query.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,8 +35,9 @@ public class UsuarioDAO implements Serializable {
 
 	public Usuario porEmail(String email) {
 		Usuario usuario = null;
+
 		try {
-			usuario = this.manager.createQuery("from usuario where lower(email) = :email", Usuario.class)
+			usuario = this.manager.createQuery("from Usuario where lower(email) = :email", Usuario.class)
 					.setParameter("email", email.toLowerCase()).getSingleResult();
 		} catch (NoResultException e) {
 			// nenhum usuário encontrado com o e-mail informado.

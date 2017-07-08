@@ -33,12 +33,12 @@ public class AppUserDetailsService implements UserDetailsService {
 	}
 
 	private Collection<? extends GrantedAuthority> getGruposUsuario(Usuario usuario) {
-		List<SimpleGrantedAuthority> gruposUsuario = new ArrayList<>();
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
 		for (GrupoUsuario grupoUsuario : usuario.getGruposUsuario()) {
-			gruposUsuario.add(new SimpleGrantedAuthority(grupoUsuario.getNome()));
+			authorities.add(new SimpleGrantedAuthority(grupoUsuario.getNome()));
 		}
-		return null;
+		return authorities;
 	}
 
 }

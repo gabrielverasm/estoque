@@ -31,10 +31,6 @@ public class UsuarioService implements Serializable {
 		return usuario;
 	}
 
-	public List<Usuario> listaVendedores() {
-		return usuarioDAO.listarVendedores();
-	}
-	
 	public List<Usuario> pesquisar(UsuarioParaPesquisa usuarioParaPesquisa) {
 		return usuarioDAO.pesquisar(usuarioParaPesquisa.getNome());
 	}
