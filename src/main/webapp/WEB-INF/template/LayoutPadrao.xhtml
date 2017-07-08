@@ -51,10 +51,10 @@
 	<div id="geral">
 
 		<div id="topo">
-			<h:graphicImage library="images" name="Logo30.png"
-				styleClass="logoImg" />
-			<p:outputLabel styleClass="logoTexto" id="title"
-				value="Controle de Estoque - HDEAM" />
+			<a href="/Home.xhtml" style="text-decoration: none"> <h:graphicImage
+					library="images" name="Logo HDEAM 50 Branco.png"
+					styleClass="logoImg" /> <p:outputLabel styleClass="logoTexto"
+					id="title" value="Controle de Estoque" /></a>
 		</div>
 
 		<div id="topoUsuario">
@@ -87,7 +87,7 @@
 					<p:menuitem value="Produtos" url="/produtos/CadastroProduto.xhtml" />
 
 					<p:submenu label="Administração" url="Home.xhtml">
-						<p:menuitem value="Usuário" url="/pages/usuario.xhtml" />
+						<p:menuitem value="Usuário" url="/usuarios/CadastroUsuario.xhtml" />
 					</p:submenu>
 				</p:menubar>
 			</h:form>
@@ -100,7 +100,7 @@
 			<ui:insert name="corpo" />
 		</div>
 
-		
+
 	</div>
 	<p:separator style="margin-top: 20px" />
 
