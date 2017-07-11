@@ -5,16 +5,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
+	<f:metadata>
+		<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+	</f:metadata>
+
 	<ui:define name="titulo">#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto' : 'Novo Produto'}</ui:define>
 
 	<ui:define name="corpo">
 
 
-		<f:metadata>
-			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
-		</f:metadata>
-
 		<h:form id="frmProduto">
+
+			<f:metadata>
+				<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			</f:metadata>
 			<h1>#{cadastroProdutoBean.verificaEdicao() ? 'Edição de Produto'
 				: 'Novo Produto'}</h1>
 
@@ -86,6 +90,11 @@
 
 				</p:panelGrid>
 
+				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+					<p:button value="Novo" outcome="/produtos/CadastroProduto" />
+					<p:commandButton value="Salvar"
+						action="#{cadastroProdutoBean.salvar}" update="@form" />
+				</p:panelGrid>
 
 				<ui:include src="/WEB-INF/template/produto/PesquisaProduto.xhtml" />
 

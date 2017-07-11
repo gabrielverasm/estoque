@@ -9,14 +9,14 @@ import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.ProdutoDAO;
 import com.algaworks.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Produto.class,value="produtoConverter")
+@FacesConverter(forClass = Produto.class)
 public class ProdutoConverter implements Converter {
 
 	//@Inject
-	private ProdutoDAO produtos;
+	private ProdutoDAO produtoDAO;
 	
 	public ProdutoConverter() {
-		produtos = CDIServiceLocator.getBean(ProdutoDAO.class);
+		produtoDAO = CDIServiceLocator.getBean(ProdutoDAO.class);
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class ProdutoConverter implements Converter {
 		
 		if (value != null) {
 			Long id = new Long(value);
-			retorno = produtos.porId(id);
+			retorno = produtoDAO.porId(id);
 		}
 		
 		return retorno;
