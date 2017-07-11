@@ -44,7 +44,7 @@ h1 {
 .logoTexto {
 	font-family: Arial, helvetica, sans-serif !important;
 	color: white;
-	font-size: 16;
+	font-size: 16px !important;
 	font-weight: bold;
 	padding-left: 75px;
 	position: absolute;
