@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,10 +26,15 @@ public class Usuario implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@Column(nullable = false, length = 80)
+	@Column(nullable = false, length = 30)
 	private String nome;
 
-	private String cargo;
+	@Column(nullable = false, length = 30)
+	private String sobreNome;
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private Cargo cargo;
 
 	@Column(nullable = false, unique = true, length = 255)
 	private String email;
@@ -39,6 +46,11 @@ public class Usuario implements Serializable {
 	@JoinTable(name = "usuario_grupousuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<GrupoUsuario> gruposUsuario = new ArrayList<>();
 
+	@Override
+	public String toString() {
+		return nome;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +65,22 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSobreNome() {
+		return sobreNome;
+	}
+
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
 
 	public String getEmail() {
@@ -102,19 +130,6 @@ public class Usuario implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return nome;
-	}
-
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
 	}
 
 }

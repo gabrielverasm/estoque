@@ -9,13 +9,13 @@ import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.ProdutoDAO;
 import com.algaworks.pedidovenda.util.cdi.CDIServiceLocator;
 
-@FacesConverter(forClass = Produto.class)
-public class ProdutoConverter implements Converter {
+@FacesConverter(forClass = Produto.class, value = "produtoConverter2")
+public class ProdutoConverter2 implements Converter {
 
 	// @Inject
 	private ProdutoDAO produtoDAO;
 
-	public ProdutoConverter() {
+	public ProdutoConverter2() {
 		produtoDAO = CDIServiceLocator.getBean(ProdutoDAO.class);
 	}
 

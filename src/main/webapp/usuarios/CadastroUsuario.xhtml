@@ -33,24 +33,41 @@
 			<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
 				<p:outputLabel value="Nome:" for="nome" />
-				<p:inputText id="nome" size="90" styleClass="up"
+				<p:inputText id="nome" size="30" required="true"
+					requiredMessage="Necessário preencher o Nome."
 					value="#{cadastroUsuarioBean.usuario.nome}"
 					placeholder="Informe o nome do Usuario" />
 
-				<p:outputLabel value="Cargo:" for="cargo" />
-				<p:inputText id="cargo" size="90" styleClass="up"
-					value="#{cadastroUsuarioBean.usuario.cargo}"
-					placeholder="Informe o cargo" />
+				<p:outputLabel value="Sobre Nome:" for="sobreNome" />
+				<p:inputText id="sobreNome" size="30" required="true"
+					requiredMessage="Necessário preencher o Sobre Nome"
+					value="#{cadastroUsuarioBean.usuario.sobreNome}"
+					placeholder="Informe o sobre nome do usuário." />
 
 				<p:outputLabel value="E-mail:" for="email" />
-				<p:inputText id="email" size="90" styleClass="up"
+				<p:inputText id="email" size="30" styleClass="up" required="true"
+					requiredMessage="Necessário o preenchimento do e-mail."
 					value="#{cadastroUsuarioBean.usuario.email}"
 					placeholder="Informe o email do Usuario" />
+
+				<p:outputLabel for="cargo" value="Cargo" />
+				<p:selectOneMenu id="cargo"
+					value="#{cadastroUsuarioBean.usuario.cargo}">
+					<f:selectItem itemLabel="Selecione." />
+					<f:selectItems value="#{cadastroUsuarioBean.cargoUsuario}"
+						var="cargoUsuario" itemValue="#{cargoUsuario}"
+						itemLabel="#{cargoUsuario.descricao}" />
+				</p:selectOneMenu>
 
 				<p:outputLabel value="Senha:" for="senha" />
 				<p:password id="senha" size="40"
 					value="#{cadastroUsuarioBean.usuario.senha}"
 					placeholder="Informe a senha" />
+
+				<p:selectManyCheckbox id="grid" layout="grid" columns="2">
+					<f:selectItems value="#{checkboxView.cities}" var="city"
+						itemLabel="#{city}" itemValue="#{city}" />
+				</p:selectManyCheckbox>
 
 			</p:panelGrid>
 

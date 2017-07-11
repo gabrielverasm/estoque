@@ -81,6 +81,7 @@ public class CadastroMovimentacaoBean implements Serializable {
 		}
 		if (isBaixado()) {
 			produtoLinhaEditavel = null;
+			movimentacao.removerItemVazio();
 		}
 	}
 

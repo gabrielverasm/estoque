@@ -7,6 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.algaworks.pedidovenda.model.Cargo;
 import com.algaworks.pedidovenda.model.Usuario;
 import com.algaworks.pedidovenda.service.UsuarioService;
 
@@ -14,15 +15,13 @@ import com.algaworks.pedidovenda.service.UsuarioService;
 @ViewScoped
 public class CadastroUsuarioBean implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
-
 	private Usuario usuario;
-	
+
 	@Inject
 	private UsuarioService usuarioService;
-	
+
 	public CadastroUsuarioBean() {
 		limpar();
 	}
@@ -30,28 +29,31 @@ public class CadastroUsuarioBean implements Serializable {
 	public void limpar() {
 		usuario = new Usuario();
 	}
-	
-	public void salvar(){
+
+	public void salvar() {
 		this.usuario = this.usuarioService.salvar(usuario);
 		limpar();
 	}
-	
-	public boolean verificaEdicao(){
+
+	public boolean verificaEdicao() {
 		return this.usuario.getId() != null;
 	}
-	
-	public Date dataHoje(){
+
+	public Date dataHoje() {
 		return new Date();
 	}
-	
-	//get and set
+
+	// get and set
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public Cargo[] getCargoUsuario() {
+		return Cargo.values();
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
+
 }
