@@ -50,7 +50,7 @@
 			<p:outputLabel for="nome" value="Descrição:" />
 			<p:inputText id="nome" size="60" maxlength="150" required="true"
 				value="#{cadastroMovimentacaoBean.movimentacao.descricao}"
-				disabled="#{cadastroMovimentacaoBean.baixado}"
+				disabled="#{cadastroMovimentacaoBean.baixado || cadastroMovimentacaoBean.movimentacao.operacao == null}"
 				placeholder="Informe um título para sua movimentação" />
 
 			<p:outputLabel value="Status" />
@@ -63,7 +63,7 @@
 
 			<p:calendar pattern="dd/MM/yyyy" styleClass="calendarpng" locale="pt"
 				style=" width: 150px !important;"
-				disabled="#{cadastroMovimentacaoBean.baixado}"
+				disabled="#{cadastroMovimentacaoBean.baixado || cadastroMovimentacaoBean.movimentacao.operacao == null}"
 				value="#{cadastroMovimentacaoBean.movimentacao.prazoDeEntrega}" />
 
 			<!-- 			<h:panelGroup id="lbValidade" rendered="#{cadastroMovimentacaoBean.flag}"> -->
@@ -93,4 +93,5 @@
 		</p:panelGrid>
 
 	</div>
+	
 </ui:composition>

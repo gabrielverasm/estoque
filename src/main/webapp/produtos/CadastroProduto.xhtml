@@ -35,20 +35,20 @@
 				<p:panelGrid columns="4" id="painel" styleClass="ui-panelgrid-blank">
 
 					<p:outputLabel value="Id:" />
-					<p:inputNumber emptyValue="sign" id="id" minValue="0"
-						readonly="true" size="1" value="#{cadastroProdutoBean.produto.id}" />
+					<p:outputLabel emptyValue="sign" id="id" readonly="true" size="1"
+						value="#{cadastroProdutoBean.produto.id}" />
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" size="40" maxlength="100" required="true"
 						value="#{cadastroProdutoBean.produto.nome}" />
 
-					<p:outputLabel for="status" value="Status" />
-					<p:selectOneMenu id="status"
-						value="#{cadastroProdutoBean.produto.status}">
+					<p:outputLabel for="grupo" value="Grupo:" />
+					<p:selectOneMenu id="grupo" required="true"
+						requiredMessage="Necessário informar o grupo."
+						value="#{cadastroProdutoBean.produto.grupo}">
 						<f:selectItem itemLabel="Selecione." />
-						<f:selectItems value="#{cadastroProdutoBean.statusProduto}"
-							var="statusProduto" itemValue="#{statusProduto}"
-							itemLabel="#{statusProduto.descricao}" />
+						<f:selectItems value="#{cadastroProdutoBean.grupos}" var="grupo"
+							itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
 					</p:selectOneMenu>
 
 
@@ -78,16 +78,9 @@
 							itemLabel="#{unidade.descricao}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel for="grupo" value="Grupo:" />
-					<p:selectOneMenu id="grupo" required="true"
-						requiredMessage="Necessário informar o grupo."
-						value="#{cadastroProdutoBean.produto.grupo}">
-						<f:selectItem itemLabel="Selecione." />
-						<f:selectItems value="#{cadastroProdutoBean.grupos}" var="grupo"
-							itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
-
-					</p:selectOneMenu>
-
+					<p:outputLabel for="estoque" value="Estoque" />
+					<p:outputLabel id="estoque"
+						value="#{cadastroProdutoBean.produto.quantidade}" />
 				</p:panelGrid>
 
 				<p:panelGrid columns="1" style=" margin: auto;"

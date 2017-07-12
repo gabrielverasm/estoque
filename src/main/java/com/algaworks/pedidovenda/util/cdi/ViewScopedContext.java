@@ -37,6 +37,7 @@ public class ViewScopedContext implements Context, SystemEventListener {
 		return instance;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T get(final Contextual<T> component, final CreationalContext<T> creationalContext) {
 		assertActive();
@@ -97,6 +98,7 @@ public class ViewScopedContext implements Context, SystemEventListener {
 	 * 
 	 * @see javax.faces.event.SystemEventListener#processEvent(javax.faces.event.SystemEvent)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void processEvent(final SystemEvent event) {
 		if (event instanceof PreDestroyViewMapEvent) {
@@ -109,8 +111,10 @@ public class ViewScopedContext implements Context, SystemEventListener {
 					 * No way to inform the compiler of type <T> information, so
 					 * it has to be abandoned here :(
 					 */
+					@SuppressWarnings("rawtypes")
 					Contextual contextual = componentEntry.getKey();
 					Object instance = componentEntry.getValue();
+					@SuppressWarnings("rawtypes")
 					CreationalContext creational = creationalContextMap.get(contextual);
 
 					contextual.destroy(instance, creational);

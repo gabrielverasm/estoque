@@ -14,8 +14,8 @@ public class SaidaMovimentacaoService implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-	@Inject
-	private MovimentacaoService movimentacaoService;
+//	@Inject
+//	private MovimentacaoService movimentacaoService;
 	
 	@Inject
 	private EstoqueService estoqueService;

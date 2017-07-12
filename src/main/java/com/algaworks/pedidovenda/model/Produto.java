@@ -61,7 +61,7 @@ public class Produto implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
-	private Status status;
+	private Status status = Status.ATIVO;
 
 	// private List<ItemProduto> itensProduto = new ArrayList<>();
 
@@ -209,19 +209,18 @@ public class Produto implements Serializable {
 		double novaQuantidade = this.getQuantidade() - quantidade;
 
 		if (novaQuantidade < 0) {
-			throw new NegocioException("Não ha disponibilidade no estoque de "
-					+ quantidade + " itens produto " + this.getNome());
+			throw new NegocioException(
+					"Não ha disponibilidade no estoque de " + quantidade + " itens produto " + this.getNome());
 		}
 
 		this.setQuantidade(novaQuantidade);
 	}
 
 	public void adicionarEstoque(Integer quantidade) {
-		if(getQuantidade()== null){
+		if (getQuantidade() == null) {
 			setQuantidade(0.0);
 		}
 		this.setQuantidade(getQuantidade() + quantidade);
 	}
-	
-	
+
 }

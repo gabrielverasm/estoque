@@ -64,6 +64,13 @@
 					value="#{cadastroUsuarioBean.usuario.senha}"
 					placeholder="Informe a senha" />
 
+				<p:outputLabel value="Permissões:" for="permissao" />
+				<p:selectManyCheckbox id="permissao" >
+					<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+					<f:selectItem itemLabel="PS4" itemValue="PS4" />
+					<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+				</p:selectManyCheckbox>
+
 				<p:selectManyCheckbox id="grid" layout="grid" columns="2">
 					<f:selectItems value="#{checkboxView.cities}" var="city"
 						itemLabel="#{city}" itemValue="#{city}" />

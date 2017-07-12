@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import com.algaworks.pedidovenda.model.ItemMovimentacao;
 import com.algaworks.pedidovenda.model.Movimentacao;
 import com.algaworks.pedidovenda.repository.MovimentacaoDAO;
-import com.algaworks.pedidovenda.util.jpa.Transactional;
 
 public class EstoqueService implements Serializable {
 
