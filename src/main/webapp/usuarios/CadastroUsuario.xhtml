@@ -1,83 +1,80 @@
 <ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario' : 'Novo Usuario'}</ui:define>
+    <ui:define name="titulo">#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario' : 'Novo Usuario'}</ui:define>
 
-	<ui:define name="corpo">
-		<f:metadata>
-			<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"
-				converter="usuarioConverter" />
-		</f:metadata>
+    <ui:define name="corpo">
+        <f:metadata>
+            <o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"
+                converter="usuarioConverter" />
+        </f:metadata>
 
-		<h1>#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario'
-			: 'Novo Usuario'}</h1>
+        <h1>#{cadastroUsuarioBean.verificaEdicao() ? 'Edição de Usuario'
+            : 'Novo Usuario'}</h1>
 
-		<h:form>
-			<p:messages autoUpdate="true" closable="true" />
+        <h:form>
+            <p:messages autoUpdate="true" closable="true" />
 
-			<p:toolbar style="margin-top: 20px">
-				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
-					<p:commandButton value="Salvar" id="botaoSalvar"
-						action="#{cadastroUsuarioBean.salvar()}" update="@form" />
-				</p:toolbarGroup>
-				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" />
-				</p:toolbarGroup>
-			</p:toolbar>
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
+                    <p:commandButton value="Salvar" id="botaoSalvar"
+                        action="#{cadastroUsuarioBean.salvar()}" update="@form" />
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" />
+                </p:toolbarGroup>
+            </p:toolbar>
 
-			<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
-				<p:outputLabel value="Nome:" for="nome" />
-				<p:inputText id="nome" size="30" required="true"
-					requiredMessage="Necessário preencher o Nome."
-					value="#{cadastroUsuarioBean.usuario.nome}"
-					placeholder="Informe o nome do Usuario" />
+                <p:outputLabel value="Nome:" for="nome" />
+                <p:inputText id="nome" size="30" required="true"
+                    requiredMessage="Necessário preencher o Nome."
+                    value="#{cadastroUsuarioBean.usuario.nome}"
+                    placeholder="Informe o nome do Usuario" />
 
-				<p:outputLabel value="Sobre Nome:" for="sobreNome" />
-				<p:inputText id="sobreNome" size="30" required="true"
-					requiredMessage="Necessário preencher o Sobre Nome"
-					value="#{cadastroUsuarioBean.usuario.sobreNome}"
-					placeholder="Informe o sobre nome do usuário." />
+                <p:outputLabel value="Sobre Nome:" for="sobreNome" />
+                <p:inputText id="sobreNome" size="30" required="true"
+                    requiredMessage="Necessário preencher o Sobre Nome"
+                    value="#{cadastroUsuarioBean.usuario.sobreNome}"
+                    placeholder="Informe o sobre nome do usuário." />
 
-				<p:outputLabel value="E-mail:" for="email" />
-				<p:inputText id="email" size="30" styleClass="up" required="true"
-					requiredMessage="Necessário o preenchimento do e-mail."
-					value="#{cadastroUsuarioBean.usuario.email}"
-					placeholder="Informe o email do Usuario" />
+                <p:outputLabel value="E-mail:" for="email" />
+                <p:inputText id="email" size="30" styleClass="up" required="true"
+                    requiredMessage="Necessário o preenchimento do e-mail."
+                    value="#{cadastroUsuarioBean.usuario.email}"
+                    placeholder="Informe o email do Usuario" />
 
-				<p:outputLabel for="cargo" value="Cargo" />
-				<p:selectOneMenu id="cargo"
-					value="#{cadastroUsuarioBean.usuario.cargo}">
-					<f:selectItem itemLabel="Selecione." />
-					<f:selectItems value="#{cadastroUsuarioBean.cargoUsuario}"
-						var="cargoUsuario" itemValue="#{cargoUsuario}"
-						itemLabel="#{cargoUsuario.descricao}" />
-				</p:selectOneMenu>
+                <p:outputLabel for="cargo" value="Cargo" />
+                <p:selectOneMenu id="cargo"
+                    value="#{cadastroUsuarioBean.usuario.cargo}">
+                    <f:selectItem itemLabel="Selecione." />
+                    <f:selectItems value="#{cadastroUsuarioBean.cargoUsuario}"
+                        var="cargoUsuario" itemValue="#{cargoUsuario}"
+                        itemLabel="#{cargoUsuario.descricao}" />
+                </p:selectOneMenu>
 
-				<p:outputLabel value="Senha:" for="senha" />
-				<p:password id="senha" size="40"
-					value="#{cadastroUsuarioBean.usuario.senha}"
-					placeholder="Informe a senha" />
+                <p:outputLabel value="Senha:" for="senha" />
+                <p:password id="senha" size="40"
+                    value="#{cadastroUsuarioBean.usuario.senha}"
+                    placeholder="Informe a senha" />
 
-<!-- 				<p:outputLabel value="Permissões:" for="permissao" /> -->
-<!-- 				<p:selectManyCheckbox id="permissao" > -->
-<!-- 					<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" /> -->
-<!-- 					<f:selectItem itemLabel="PS4" itemValue="PS4" /> -->
-<!-- 					<f:selectItem itemLabel="Wii U" itemValue="Wii U" /> -->
-<!-- 				</p:selectManyCheckbox> -->
+                <p:outputLabel value="Permissões:" for="permissao" />
+                <p:selectManyCheckbox id="permissao" converter="grupoUsuarioConverter"
+                    value="#{cadastroUsuarioBean.permissoesDada}">
+                    <f:selectItems value="#{cadastroUsuarioBean.listaGrupoUsario}"
+                        var="permissao" itemLabel="#{permissao.nome}" itemValue="#{permissao}" />
+                </p:selectManyCheckbox>
 
-				<p:selectManyCheckbox id="grid" layout="grid" columns="2">
-					<f:selectItems value="#{checkboxView.cities}" var="city"
-						itemLabel="#{city}" itemValue="#{city}" />
-				</p:selectManyCheckbox>
 
-			</p:panelGrid>
 
-		</h:form>
-	</ui:define>
+            </p:panelGrid>
+
+        </h:form>
+    </ui:define>
 </ui:composition>

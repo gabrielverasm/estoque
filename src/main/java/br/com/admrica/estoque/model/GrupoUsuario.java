@@ -1,11 +1,13 @@
 package br.com.admrica.estoque.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,10 @@ public class GrupoUsuario implements Serializable {
 
 	@Column(nullable = false, length = 80)
 	private String descricao;
+
+	// Relacionamento implementado
+	@ManyToMany(mappedBy = "gruposUsuario", targetEntity = Usuario.class)
+	private List usuarios;
 
 	public Long getId() {
 		return id;
@@ -71,6 +77,19 @@ public class GrupoUsuario implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+
+	public List getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List usuarios) {
+		this.usuarios = usuarios;
 	}
 
 }
