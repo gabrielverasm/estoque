@@ -3,27 +3,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<p:dataTable 
+	<p:dataTable
 		value="#{cadastroMovimentacaoBean.movimentacao.itensMovimentacao}"
 		var="item" rowIndexVar="linha" id="tabelaItens">
 
-		<p:column headerText="Num." style="text-align: center; width: 80px">
+		<p:column headerText="Num." style="text-align: center; width: 30px">
 			<h:outputText value="#{item.produto.id}"
 				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
 		<p:column headerText="Cod. de Barras"
-			style="text-align: center; width: 150px">
+			style="text-align: center; width: 80px">
 			<h:outputText value="#{item.produto.codigoDeBarras}"
 				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
-		<p:column headerText="Produto"
-			style="text-align: center; width: 250px">
-			<h:outputText value="#{item.produto .nome}" style="width: 100px"
+		<p:column headerText="Produto" style="text-align: center;">
+			<h:outputText value="#{item.produto .nome}"
 				rendered="#{item.produtoAssociado}" />
 
-			<p:autoComplete styleClass="up" converter="produtoConverter2"
+			<p:autoComplete converter="produtoConverter2"
 				value="#{cadastroMovimentacaoBean.produtoLinhaEditavel}"
 				completeMethod="#{cadastroMovimentacaoBean.completarProduto}"
 				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}"
@@ -69,10 +68,11 @@
 
 		<p:column style="text-align: center; width: 60px">
 
-			<p:commandButton icon="ui-icon-trash" disabled="#{cadastroMovimentacaoBean.baixado}"
-			 action="#{cadastroMovimentacaoBean.removeItem(item,linha)}"
+			<p:commandButton icon="ui-icon-trash"
+				disabled="#{cadastroMovimentacaoBean.baixado}"
+				action="#{cadastroMovimentacaoBean.removeItem(item,linha)}"
 				title="Remover produto da lista" process="@this"
-				update="tabelaItens" style="border-left: auto; border-right: auto"/>
+				update="tabelaItens" style="border-left: auto; border-right: auto" />
 		</p:column>
 
 	</p:dataTable>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-    version="2.1">
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
 
 	<application>
-		<message-bundle>com.algaworks.pedidovenda.Messages</message-bundle>
-	
+		<message-bundle>br.com.admrica.estoque.Messages</message-bundle>
+
 		<locale-config>
 			<default-locale>pt_BR</default-locale>
 		</locale-config>
@@ -15,8 +14,7 @@
 
 	<factory>
 		<exception-handler-factory>
-			com.algaworks.pedidovenda.util.jsf.JsfExceptionHandlerFactory
-		</exception-handler-factory>
+			br.com.admrica.estoque.util.jsf.JsfExceptionHandlerFactory</exception-handler-factory>
 	</factory>
 
 </faces-config>

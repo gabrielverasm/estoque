@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 	http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.algaworks</groupId>
-	<artifactId>PedidoVenda</artifactId>
-	<version>0.0.1</version>
+	<groupId>br.com.admrica</groupId>
+	<artifactId>Estoque</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
 
 	<dependencies>
@@ -165,15 +165,15 @@
 	<repositories>
 		<!-- Repositório Primefaces -->
 		<repository>
-		<id>prime-repo</id>
-		<name>PrimeFaces Maven Repository</name>
-		<url>http://repository.primefaces.org</url>
-		<layout>default</layout>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
 
 	<build>
-		<finalName>sistemavenda</finalName>
+		<finalName>estoque</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
