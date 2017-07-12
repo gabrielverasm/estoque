@@ -91,4 +91,8 @@ public class ProdutoDAO implements Serializable {
 		return query.getResultList();
 	}
 
+	public Produto porNumero(Long numeroItem) {
+		return this.porId(numeroItem);	
+	}
+
 }

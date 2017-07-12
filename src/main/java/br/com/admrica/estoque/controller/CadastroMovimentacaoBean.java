@@ -10,6 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.admrica.estoque.model.ItemMovimentacao;
 import br.com.admrica.estoque.model.Movimentacao;
 import br.com.admrica.estoque.model.Produto;
@@ -51,7 +53,9 @@ public class CadastroMovimentacaoBean implements Serializable {
 	private EntradaMovimentacaoBean entradaMovimentacaoBean;
 
 	private Date currentDate = new Date();
-
+	
+	private Long numeroItem; 
+	
 	public Date getCurrentDate() {
 		return currentDate;
 	}
@@ -71,6 +75,14 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void Limpar() {
 		movimentacao = new Movimentacao();
+
+	}
+
+	public void carregarProdutoPorNumero() {
+		if (StringUtils.isNotBlank(String.valueOf(this.numeroItem))) {
+			this.produtoLinhaEditavel = this.produtoService.porNumero(this.numeroItem);
+			this.carregarProdutoLinhaEditavel();
+		}
 
 	}
 
@@ -228,6 +240,14 @@ public class CadastroMovimentacaoBean implements Serializable {
 
 	public void setFlag(boolean flag) {
 		this.flag = flag;
+	}
+
+	public Long getNumeroItem() {
+		return numeroItem;
+	}
+
+	public void setNumeroItem(Long numeroItem) {
+		this.numeroItem = numeroItem;
 	}
 
 }

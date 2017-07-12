@@ -36,6 +36,10 @@ public class CancelaMovimentacaoService implements Serializable {
 //			this.estoqueService.retornarItensEstoque(pedido);
 //		}
 		
+		if(movimentacao.isPendente()){
+			throw new NegocioException("A movimentação não pode ser cancelada, quando Status estiver PEDENTE");
+		}
+		
 		if(movimentacao.isOperacaoEntrada()){
 			//retirar do estoque
 			this.estoqueService.baixarItensEstoque(movimentacao);

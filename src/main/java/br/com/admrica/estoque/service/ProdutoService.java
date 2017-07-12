@@ -62,4 +62,8 @@ public class ProdutoService implements Serializable {
 	public List<Produto> listarTodos(){
 		return this.produtos.listarTodos();
 	}
+
+	public Produto porNumero(Long numeroItem) {
+		return this.produtos.porNumero(numeroItem);
+	}
 }

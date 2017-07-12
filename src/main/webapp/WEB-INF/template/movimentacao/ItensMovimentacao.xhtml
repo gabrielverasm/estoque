@@ -10,6 +10,15 @@
 		<p:column headerText="Num." style="text-align: center; width: 30px">
 			<h:outputText value="#{item.produto.id}"
 				rendered="#{item.produtoAssociado}" />
+			
+			<p:inputText value="#{cadastroMovimentacaoBean.numeroItem}" label="SKU"
+				rendered="#{not item.produtoAssociado}"
+				style="width: 65px">
+				<p:ajax event="change" process="@this"
+					update="tabelaItens"
+					listener="#{cadastroMovimentacaoBean.carregarProdutoPorNumero()}" />
+			</p:inputText>	
+				
 		</p:column>
 
 		<p:column headerText="Cod. de Barras"
