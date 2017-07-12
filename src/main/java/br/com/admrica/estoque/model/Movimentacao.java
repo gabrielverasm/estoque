@@ -183,15 +183,16 @@ public class Movimentacao implements Serializable {
 //	}
 //	
 //
-//	@Transient
-//	public boolean isNaoCancelavel() {
-//		return !isCancelavel();
-//	}
+	@Transient
+	public boolean isNaoCancelado() {
+		return !isCancelado();
+	}
 
-//	@Transient
-//	private boolean isCancelado() {
-//		return StatusPedido.CANCELADO.equals(this.getStatus());
-//	}
+	@Transient
+	public boolean isCancelado() {
+		//return StatusPedido.CANCELADO.equals(this.getStatus());
+		return StatusMovimentacao.CANCELADO.equals(this.statusMovimentacao);
+	}
 //
 	@Transient
 	public boolean isAlteravel() {

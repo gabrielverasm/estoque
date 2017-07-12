@@ -13,6 +13,8 @@
 			<p:commandButton value="Baixar"
 				disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
 				action="#{cadastroMovimentacaoBean.entradaSaida}" update="@form" />
+				
+				
 			<p:commandButton value="Baixar" rendered="1=2"
 				disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
 				action="#{entradaMovimentacaoBean.adicionarNoEstoque}"
@@ -26,7 +28,8 @@
 		<p:toolbarGroup align="right">
 
 			<p:separator />
-
+			<p:commandButton value="Cancelar" action="#{cancelaMovimentacaoBean.cancelarMovimentacao()}"
+  			process="@this" update="@form"/>
 		</p:toolbarGroup>
 	</p:toolbar>
 
