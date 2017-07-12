@@ -50,6 +50,12 @@ public class CadastroMovimentacaoBean implements Serializable {
 	@Inject
 	private EntradaMovimentacaoBean entradaMovimentacaoBean;
 
+	private Date currentDate = new Date();
+
+	public Date getCurrentDate() {
+		return currentDate;
+	}
+
 	public CadastroMovimentacaoBean() {
 		Limpar();
 	}
@@ -157,6 +163,7 @@ public class CadastroMovimentacaoBean implements Serializable {
 		// this.movimentacao.recalcularValorTotal();
 
 	}
+
 	@Transactional
 	public void removeItem(ItemMovimentacao item, int linha) {
 

@@ -63,6 +63,7 @@
 
 			<p:calendar pattern="dd/MM/yyyy" styleClass="calendarpng" locale="pt"
 				style=" width: 150px !important;"
+				mindate="#{cadastroMovimentacaoBean.currentDate}"
 				disabled="#{cadastroMovimentacaoBean.baixado || cadastroMovimentacaoBean.movimentacao.operacao == null}"
 				value="#{cadastroMovimentacaoBean.movimentacao.prazoDeEntrega}" />
 
@@ -93,5 +94,5 @@
 		</p:panelGrid>
 
 	</div>
-	
+
 </ui:composition>
