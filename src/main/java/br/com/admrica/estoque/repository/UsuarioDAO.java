@@ -37,7 +37,7 @@ public class UsuarioDAO implements Serializable {
 		Usuario usuario = null;
 
 		try {
-			usuario = this.manager.createQuery("from Usuario where lower(email) = :email", Usuario.class)
+			usuario = this.manager.createQuery("from Usuario where lower(email) = :email and ativo = true", Usuario.class)
 					.setParameter("email", email.toLowerCase()).getSingleResult();
 		} catch (NoResultException e) {
 			// nenhum usuário encontrado com o e-mail informado.

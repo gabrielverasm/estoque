@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,131 +21,137 @@ import javax.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String nome;
+	@Column(nullable = false, length = 30)
+	private String nome;
 
-    @Column(nullable = false, length = 30)
-    private String sobreNome;
+	@Column(nullable = false, length = 30)
+	private String sobreNome;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private Cargo cargo;
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private Cargo cargo;
 
-    @Column(nullable = false, unique = true, length = 255)
-    private String email;
+	@Column(nullable = false, unique = true, length = 255)
+	private String email;
 
-    @Column(nullable = false, length = 20)
-    private String senha;
+	@Column(nullable = false, length = 20)
+	private String senha;
+	
+	private Boolean ativo = false;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_grupousuario", 
-    joinColumns = @JoinColumn(name = "usuario_id"), 
-    inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-    private List<GrupoUsuario> gruposUsuario = new ArrayList<>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "usuario_grupousuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+	private List<GrupoUsuario> gruposUsuario = new ArrayList<>();
 
-    
-//    public void adicionaItemVazio() {
-//
-//        GrupoUsuario grupoUsuario = new GrupoUsuario();
-//        List<GrupoUsuario> lista = new ArrayList<>();
-//            
-//        grupoUsuario.setNome("teste");
-//        lista.add(grupoUsuario);
-//            
-//        this.setGruposUsuario(lista);
-//    }
-    
-    
-    @Override
-    public String toString() {
-        return nome;
-    }
-    
-    public Long getId() {
-        return id;
-    }
+	// public void adicionaItemVazio() {
+	//
+	// GrupoUsuario grupoUsuario = new GrupoUsuario();
+	// List<GrupoUsuario> lista = new ArrayList<>();
+	//
+	// grupoUsuario.setNome("teste");
+	// lista.add(grupoUsuario);
+	//
+	// this.setGruposUsuario(lista);
+	// }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Override
+	public String toString() {
+		return nome;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getSobreNome() {
-        return sobreNome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Cargo getCargo() {
-        return cargo;
-    }
+	public String getSobreNome() {
+		return sobreNome;
+	}
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
-    }
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Cargo getCargo() {
+		return cargo;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public List<GrupoUsuario> getGruposUsuario() {
-        return gruposUsuario;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public void setGruposUsuario(List<GrupoUsuario> gruposUsuario) {
-        this.gruposUsuario = gruposUsuario;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	public List<GrupoUsuario> getGruposUsuario() {
+		return gruposUsuario;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	public void setGruposUsuario(List<GrupoUsuario> gruposUsuario) {
+		this.gruposUsuario = gruposUsuario;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 }
