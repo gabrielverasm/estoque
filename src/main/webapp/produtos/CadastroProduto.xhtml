@@ -36,12 +36,13 @@
 					style=" margin: auto; margin-top: 20px;"
 					styleClass="ui-panelgrid-blank">
 
-					<p:outputLabel value="Id:" />
+					<p:outputLabel value="Número:" />
 					<p:outputLabel emptyValue="sign" id="id" readonly="true" size="1"
 						value="#{cadastroProdutoBean.produto.id}" />
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" size="40" maxlength="100" required="true"
+						requiredMessage="Necessário informar o número."
 						value="#{cadastroProdutoBean.produto.nome}" />
 
 					<p:outputLabel for="grupo" value="Grupo:" />
