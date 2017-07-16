@@ -63,6 +63,8 @@ public class Produto implements Serializable {
 	@Column(nullable = false, length = 10)
 	private Status status = Status.ATIVO;
 
+	private Boolean alerta = false;
+
 	// private List<ItemProduto> itensProduto = new ArrayList<>();
 
 	@ManyToOne
@@ -212,6 +214,9 @@ public class Produto implements Serializable {
 			throw new NegocioException(
 					"Não ha disponibilidade no estoque de " + quantidade + " itens produto " + this.getNome());
 		}
+		if (novaQuantidade <= estoqueMinimo) {
+			alerta = true;
+		}
 
 		this.setQuantidade(novaQuantidade);
 	}
@@ -221,6 +226,14 @@ public class Produto implements Serializable {
 			setQuantidade(0.0);
 		}
 		this.setQuantidade(getQuantidade() + quantidade);
+	}
+
+	public Boolean getAlerta() {
+		return alerta;
+	}
+
+	public void setAlerta(Boolean alerta) {
+		this.alerta = alerta;
 	}
 
 }

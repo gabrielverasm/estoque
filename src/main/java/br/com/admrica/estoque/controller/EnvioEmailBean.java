@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.outjected.email.api.MailMessage;
+import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 
 import br.com.admrica.estoque.util.jsf.FacesUtil;
 import br.com.admrica.estoque.util.mail.Mailer;
@@ -24,7 +25,10 @@ public class EnvioEmailBean implements Serializable {
 		MailMessage message = mailer.novaMensagem();
 		
 		//message.to(this.alerta.getUsuario()).getEmail().subject("O produto...");
-		message.to("gabrielverasm@gmail.com").subject("Alerta falta de produtos").bodyHtml("Email teste").send();
+		message.to("gabrielverasm@gmail.com")
+		.subject("Alerta falta de produtos")
+		.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/email.template")))
+		.send();
 		
 		FacesUtil.InfoMessage("E-mail envido com sucesso!");
 	}
