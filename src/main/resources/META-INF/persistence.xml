@@ -4,19 +4,22 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
 	<persistence-unit name="estoquePU">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+		<non-jta-data-source>java:comp/env/jdbc/estoqueDB</non-jta-data-source>
 
 
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://estoquedbhdeam.mysql.uhserver.com:3306/estoquedbhdeam?autoReconnect=true" />
-			<property name="javax.persistence.jdbc.user" value="hdeam" />
-			<property name="javax.persistence.jdbc.password" value="1056573HDEAM@" />
+			<!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" 
+				/> <property name="javax.persistence.jdbc.url" value="jdbc:mysql://estoquedbhdeam.mysql.uhserver.com:3306/estoquedbhdeam?autoReconnect=true" 
+				/> <property name="javax.persistence.jdbc.user" value="hdeam" /> <property 
+				name="javax.persistence.jdbc.password" value="1056573HDEAM@" /> -->
+
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			
+
 		</properties>
 	</persistence-unit>
 
