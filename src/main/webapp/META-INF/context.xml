@@ -9,9 +9,9 @@
 		factory="org.apache.naming.factory.BeanFactory" 
 		type="com.mchange.v2.c3p0.ComboPooledDataSource"
 		driverClass="com.mysql.jdbc.Driver"
-		jdbcUrl="jdbc:mysql://estoquedbhdeam.mysql.uhserver.com:3306/estoquedbhdeam?autoReconnect=true"
-		user="hdeam" 
-		password="1056573HDEAM@" 
+		jdbcUrl="jdbc:mysql://bancohdeam.cawscjnuki8p.sa-east-1.rds.amazonaws.com:3306/hdeamdb?autoReconnect=true"
+		user="admrica" 
+		password="1056573Biel!" 
 		minPoolSize="2" 
 		maxPoolSize="2" />
 
