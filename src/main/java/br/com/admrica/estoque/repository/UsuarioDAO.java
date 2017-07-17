@@ -44,4 +44,11 @@ public class UsuarioDAO implements Serializable {
 		}
 		return usuario;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Usuario> pesquisarPorCargo() {
+		String jpql = "from Usuario u where u.cargo = 'DIRECAO'";
+		Query query = this.manager.createQuery(jpql,Usuario.class);
+		return query.getResultList();
+	}
 }

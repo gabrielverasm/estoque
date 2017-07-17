@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.admrica.estoque.model.Movimentacao;
+import br.com.admrica.estoque.service.EnvioEmailService;
 import br.com.admrica.estoque.service.SaidaMovimentacaoService;
 import br.com.admrica.estoque.validation.MovimentacaoAlteradoEvent;
 import br.com.admrica.estoque.validation.MovimentacaoEdicao;
@@ -27,11 +28,15 @@ public class SaidaMovimentacaoBean implements Serializable {
 
 	@Inject
 	private Event<MovimentacaoAlteradoEvent> movimentacaoAlteradoEvent;
+	
+	@Inject
+	private EnvioEmailService envioEmailService;
 
 
 	public void retirarDoEstoque(){
 		this.movimentacao.removerItemVazio();
 		this.movimentacao = this.saidaMovimentacaoService.retirarDoEstoque(this.movimentacao);
+		this.envioEmailService.verificaQuantidadeProdutoEstoque(this.movimentacao);
 		this.movimentacaoAlteradoEvent.fire(new MovimentacaoAlteradoEvent(this.movimentacao));
 	}
 }
