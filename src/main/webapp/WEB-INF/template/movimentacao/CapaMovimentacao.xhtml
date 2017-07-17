@@ -86,10 +86,6 @@
 				<p:commandButton value="Baixar"
 					disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
 					action="#{cadastroMovimentacaoBean.entradaSaida}" update="@form" />
-				<p:commandButton value="Baixar" rendered="1=2"
-					disabled="#{cadastroMovimentacaoBean.movimentacao.verifica()}"
-					action="#{entradaMovimentacaoBean.adicionarNoEstoque}"
-					process="@this" update="@form" />
 			</p:outputPanel>
 		</p:panelGrid>
 
