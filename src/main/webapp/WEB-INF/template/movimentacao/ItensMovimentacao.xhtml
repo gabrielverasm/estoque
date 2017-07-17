@@ -13,7 +13,7 @@
 			
 			<p:inputText value="#{cadastroMovimentacaoBean.numeroItem}" label="SKU"
 				rendered="#{not item.produtoAssociado}"
-				style="width: 65px">
+				style="width: 20px">
 				<p:ajax event="change" process="@this"
 					update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.carregarProdutoPorNumero()}" />
