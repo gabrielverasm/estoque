@@ -16,20 +16,20 @@ public class ProdutoService implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ProdutoDAO produtos;
+	private ProdutoDAO produtoDAO;
 	
 	@Transactional
 	public Produto salvar(Produto produto) {
-		return produtos.guardar(produto);
+		return produtoDAO.guardar(produto);
 	}
 	
 	@Transactional
 	public void remover(Produto produto){
-		produtos.remover(produto);
+		produtoDAO.remover(produto);
 	}
 	
 	public Produto porId(Long id){
-		return this.produtos.porId(id);
+		return this.produtoDAO.porId(id);
 	}
 	
 	public List<Produto> filtrados(ProdutoParaPesquisa filtro) {
@@ -40,7 +40,7 @@ public class ProdutoService implements Serializable {
 //			return null;
 //		}
 		
-		lista = produtos.filtrados(filtro);
+		lista = produtoDAO.filtrados(filtro);
 		
 		if(lista.isEmpty()){
 			FacesUtil.AvisoMessage("Nenhum produto encontrado!");
@@ -50,20 +50,23 @@ public class ProdutoService implements Serializable {
 		return lista;
 	}
 	
+	public List<Produto> pesquisarPorProdutoAcabando(){
+		return this.produtoDAO.pesquisarPorProdutoAcabando();
+	}
 	
 	public List<Produto> porNome(String nome){
-		return this.produtos.porNome(nome.toUpperCase());
+		return this.produtoDAO.porNome(nome.toUpperCase());
 	}
 	
 	public Produto porSku(String sku){
-		return this.produtos.porSku(sku);
+		return this.produtoDAO.porSku(sku);
 	}
 	
 	public List<Produto> listarTodos(){
-		return this.produtos.listarTodos();
+		return this.produtoDAO.listarTodos();
 	}
 
 	public Produto porNumero(Long numeroItem) {
-		return this.produtos.porNumero(numeroItem);
+		return this.produtoDAO.porNumero(numeroItem);
 	}
 }

@@ -94,5 +94,12 @@ public class ProdutoDAO implements Serializable {
 	public Produto porNumero(Long numeroItem) {
 		return this.porId(numeroItem);	
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Produto> pesquisarPorProdutoAcabando(){
+		String jpql = "from Produto p where p.quantidade <= (p.estoqueMinimo + (p.estoqueMinimo * 0.3))";
+		Query query = this.manager.createQuery(jpql,Produto.class);
+		return query.getResultList();
+	}
 
 }

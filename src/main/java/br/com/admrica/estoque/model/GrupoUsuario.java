@@ -28,7 +28,8 @@ public class GrupoUsuario implements Serializable {
 
 	// Relacionamento implementado
 	@ManyToMany(mappedBy = "gruposUsuario", targetEntity = Usuario.class)
-	private List usuarios;
+	private List<Usuario> usuarios;
+	//private List usuarios;
 
 	public Long getId() {
 		return id;
@@ -84,12 +85,20 @@ public class GrupoUsuario implements Serializable {
 		return nome;
 	}
 
-	public List getUsuarios() {
-		return usuarios;
+//	public List getUsuarios() {
+//		return usuarios;
+//	}
+//
+//	public void setUsuarios(List usuarios) {
+//		this.usuarios = usuarios;
+//	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
-	public void setUsuarios(List usuarios) {
-		this.usuarios = usuarios;
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 }

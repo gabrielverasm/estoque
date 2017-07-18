@@ -10,15 +10,14 @@
 		<p:column headerText="Num." style="text-align: center; width: 30px">
 			<h:outputText value="#{item.produto.id}"
 				rendered="#{item.produtoAssociado}" />
-			
-			<p:inputText value="#{cadastroMovimentacaoBean.numeroItem}" label="SKU"
-				rendered="#{not item.produtoAssociado}"
+
+			<p:inputText value="#{cadastroMovimentacaoBean.numeroItem}"
+				label="SKU" rendered="#{not item.produtoAssociado}"
 				style="width: 20px">
-				<p:ajax event="change" process="@this"
-					update="tabelaItens"
+				<p:ajax event="change" process="@this" update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.carregarProdutoPorNumero()}" />
-			</p:inputText>	
-				
+			</p:inputText>
+
 		</p:column>
 
 		<p:column headerText="Cod. de Barras"
@@ -60,6 +59,7 @@
 
 		<p:column headerText="Qtde" style="width: 50px">
 			<p:inputText value="#{item.quantidade}" style="width: 40px"
+				onkeyup="somenteNumeros(this)"
 				disabled="#{cadastroMovimentacaoBean.movimentacao.naoAlteravel}">
 				<p:ajax event="change" process="@this" update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
@@ -85,5 +85,16 @@
 		</p:column>
 
 	</p:dataTable>
+
+	<script>
+    function somenteNumeros(num) {
+        var er = /[^0-9.]/;
+        er.lastIndex = 0;
+        var campo = num;
+        if (er.test(campo.value)) {
+          campo.value = "";
+        }
+    }
+ </script>
 
 </ui:composition>

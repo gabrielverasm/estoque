@@ -49,7 +49,7 @@
 
 			<p:outputLabel for="nome" value="Descrição:" />
 			<p:inputText id="nome" size="60" maxlength="150" required="true"
-				value="#{cadastroMovimentacaoBean.movimentacao.descricao}"
+				value="#{cadastroMovimentacaoBean.movimentacao.descricao}" requiredMessage="Informe uma descrição"
 				disabled="#{cadastroMovimentacaoBean.baixado ||cadastroMovimentacaoBean.movimentacao.cancelado ||cadastroMovimentacaoBean.movimentacao.operacao == null}"
 				placeholder="Informe um título para sua movimentação" />
 
