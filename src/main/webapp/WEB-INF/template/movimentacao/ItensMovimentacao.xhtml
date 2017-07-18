@@ -20,11 +20,11 @@
 
 		</p:column>
 
-		<p:column headerText="Cod. de Barras"
-			style="text-align: center; width: 80px">
-			<h:outputText value="#{item.produto.codigoDeBarras}"
-				rendered="#{item.produtoAssociado}" />
-		</p:column>
+<!-- 		<p:column headerText="Cod. de Barras" -->
+<!-- 			style="text-align: center; width: 80px"> -->
+<!-- 			<h:outputText value="#{item.produto.codigoDeBarras}" -->
+<!-- 				rendered="#{item.produtoAssociado}" /> -->
+<!-- 		</p:column> -->
 
 		<p:column headerText="Produto" style="text-align: center;">
 			<h:outputText value="#{item.produto .nome}"
@@ -42,20 +42,6 @@
 			</p:autoComplete>
 		</p:column>
 
-		<p:column headerText="Grupo" style="text-align: center; width: 100px">
-			<h:outputText value="#{item.produto.grupo}"
-				rendered="#{item.produtoAssociado}" />
-		</p:column>
-
-		<p:column headerText="Unidade" style="text-align: center; width: 80px">
-			<h:outputText value="#{item.produto.unidade}"
-				rendered="#{item.produtoAssociado}" />
-		</p:column>
-
-		<p:column headerText="Estoque" style="text-align: center; width: 60px">
-			<h:outputText value="#{item.produto.quantidade}"
-				rendered="#{item.produtoAssociado}" />
-		</p:column>
 
 		<p:column headerText="Qtde" style="width: 50px">
 			<p:inputText value="#{item.quantidade}" style="width: 40px"
@@ -64,6 +50,22 @@
 				<p:ajax event="change" process="@this" update="tabelaItens"
 					listener="#{cadastroMovimentacaoBean.atualizarQuantidade(item,linha)}" />
 			</p:inputText>
+		</p:column>
+
+		<p:column headerText="Estoque" style="text-align: center; width: 60px">
+			<h:outputText value="#{item.produto.quantidade}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
+
+
+		<p:column headerText="Grupo" style="text-align: center; width: 100px">
+			<h:outputText value="#{item.produto.grupo}"
+				rendered="#{item.produtoAssociado}" />
+		</p:column>
+
+		<p:column headerText="Unidade" style="text-align: center; width: 80px">
+			<h:outputText value="#{item.produto.unidade}"
+				rendered="#{item.produtoAssociado}" />
 		</p:column>
 
 		<p:column headerText="validade" style="width: 80px" id="coluna"
@@ -75,7 +77,7 @@
 			</p:calendar>
 		</p:column>
 
-		<p:column style="text-align: center; width: 60px">
+		<p:column style="text-align: center; width: 32px">
 
 			<p:commandButton icon="ui-icon-trash"
 				disabled="#{cadastroMovimentacaoBean.baixado}"

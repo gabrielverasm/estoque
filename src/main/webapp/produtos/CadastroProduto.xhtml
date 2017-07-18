@@ -42,7 +42,7 @@
 
 					<p:outputLabel for="nome" value="Nome:" />
 					<p:inputText id="nome" size="40" maxlength="100" required="true"
-					requiredMessage="Necessário informar o nome."
+						requiredMessage="Necessário informar o nome."
 						value="#{cadastroProdutoBean.produto.nome}" />
 
 					<p:outputLabel for="grupo" value="Grupo:" />
@@ -54,12 +54,14 @@
 							itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
 					</p:selectOneMenu>
 
+					<p:outputLabel value="Unidade:" />
+					<p:selectOneMenu value="#{cadastroProdutoBean.produto.unidade}">
+						<f:selectItem itemLabel="Selecione." />
+						<f:selectItems value="#{cadastroProdutoBean.unidades}"
+							var="unidade" itemValue="#{unidade}"
+							itemLabel="#{unidade.descricao}" />
+					</p:selectOneMenu>
 
-					<p:outputLabel for="codigoDeBarra" value="Cód. de Barras:" />
-					<p:inputText id="codigoDeBarra"
-						value="#{cadastroProdutoBean.produto.codigoDeBarras}">
-						<f:convertNumber maxIntegerDigits="128" />
-					</p:inputText>
 
 					<p:outputLabel for="qtdDiaria" value="Qtd. Diária: " />
 					<p:inputNumber id="qtdDiaria" minValue="0" size="5"
@@ -73,17 +75,15 @@
 						requiredMessage="Necessário informar o estoque mínimo."
 						value="#{cadastroProdutoBean.produto.estoqueMinimo}" />
 
-					<p:outputLabel value="Unidade:" />
-					<p:selectOneMenu value="#{cadastroProdutoBean.produto.unidade}">
-						<f:selectItem itemLabel="Selecione." />
-						<f:selectItems value="#{cadastroProdutoBean.unidades}"
-							var="unidade" itemValue="#{unidade}"
-							itemLabel="#{unidade.descricao}" />
-					</p:selectOneMenu>
-
 					<p:outputLabel for="estoque" value="Estoque" />
 					<p:outputLabel id="estoque"
 						value="#{cadastroProdutoBean.produto.quantidade}" />
+
+					<!-- 					<p:outputLabel for="codigoDeBarra" value="Cód. de Barras:" /> -->
+					<!-- 					<p:inputText id="codigoDeBarra" -->
+					<!-- 						value="#{cadastroProdutoBean.produto.codigoDeBarras}"> -->
+					<!-- 						<f:convertNumber maxIntegerDigits="128" /> -->
+					<!-- 					</p:inputText> -->
 				</p:panelGrid>
 
 				<p:panelGrid columns="1" style=" margin: auto;"

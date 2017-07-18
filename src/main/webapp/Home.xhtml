@@ -8,13 +8,16 @@
 	<ui:define name="titulo">Controle de Estoque - Home</ui:define>
 
 	<ui:define name="corpo">
-		Bem-vindo ao controle de estoque - HDEAM!
-		
+
 		<h:form>
 			<p:dataTable var="produto" value="#{homeBean.listaProdutoAcabando}"
 				style="margin-top: 20px;" emptyMessage="Nenhum produto encontrado."
 				rows="25" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom" sortBy="#{produto.id}">
+
+				<f:facet name="header">
+        Estoque Crítico
+    </f:facet>
 
 				<p:column headerText="Id" style="width: 32px;"
 					sortBy="#{produto.id}">
