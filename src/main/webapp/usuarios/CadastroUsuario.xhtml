@@ -52,6 +52,10 @@
 					value="#{cadastroUsuarioBean.usuario.email}"
 					placeholder="Informe o email do Usuario" />
 
+				<p:outputLabel value="Recebe alerta:" for="recebeAlerta" />
+				<p:selectBooleanCheckbox id="recebeAlerta"
+					value="#{cadastroUsuarioBean.usuario.recebeAlerta}" />
+
 				<p:outputLabel for="cargo" value="Cargo" />
 				<p:selectOneMenu id="cargo"
 					value="#{cadastroUsuarioBean.usuario.cargo}">
@@ -86,9 +90,15 @@
 				</p:selectManyCheckbox>
 
 				<p:outputLabel value="Ativo:" for="ativo" />
-				<p:selectBooleanCheckbox id="ativo" 
+				<p:selectBooleanCheckbox id="ativo"
 					value="#{cadastroUsuarioBean.usuario.ativo}" />
 
+			</p:panelGrid>
+
+			<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+				<p:commandButton value="Salvar"
+					action="#{cadastroUsuarioBean.salvar()}" update="@form" />
+				<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" />
 			</p:panelGrid>
 
 			<p:separator />
