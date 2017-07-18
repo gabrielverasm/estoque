@@ -45,24 +45,24 @@ public class EnvioEmailService implements Serializable {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 
 		// MONTANDO A MGS
-		String msg = " ";
+		String msg = "Os produtos abaixo listados estão com estoque crítico e necessitam de aquisição." + "\n" + "\n"
+				+ "\n";
 		for (Produto item : produtos) {
-			msg += " <b>Produto:<\b> " + item.getNome() + " Qtd: " + item.getQuantidade() + "\n";
+			msg += "Produto: " + item.getNome() + "       Estoque: " + item.getQuantidade() + "\n";
 		}
 
 		// PEGANDO OS DIRETORES
-//		List<Usuario> diretores;
-//		diretores = this.usuarioDAO.pesquisarPorCargo();
-		
-		//PEGANDO USUARIO QUE RECEBE ALERTA
+		// List<Usuario> diretores;
+		// diretores = this.usuarioDAO.pesquisarPorCargo();
+
+		// PEGANDO USUARIO QUE RECEBE ALERTA
 		List<Usuario> usuariosAlerta;
 		usuariosAlerta = this.usuarioDAO.pesquisaUsuarioRecebeAlerta();
-		
 
 		MailMail mm = (MailMail) context.getBean("mailMail");
 
 		for (Usuario usuarioAlerta : usuariosAlerta)
-			mm.sendMail("alerta@gmail.com", usuarioAlerta.getEmail(), "Produtos que estão acabando", msg);
+			mm.sendMail("alerta@gmail.com", usuarioAlerta.getEmail(), "Alerta - Estoque insuficiente.", msg);
 	}
 
 }
