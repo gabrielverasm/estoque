@@ -51,4 +51,17 @@ public class UsuarioDAO implements Serializable {
 		Query query = this.manager.createQuery(jpql,Usuario.class);
 		return query.getResultList();
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> pesquisaUsuarioRecebeAlerta(){
+		String jpql = "from Usuario u where u.recebeAlerta = true and ativo = true";
+		Query query = this.manager.createQuery(jpql,Usuario.class);
+		
+		List<Usuario> lista = query.getResultList();
+		for(Usuario u : lista ){
+			System.out.println(u.getEmail());
+		}
+		return query.getResultList();
+	}
 }

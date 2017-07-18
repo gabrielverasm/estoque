@@ -47,17 +47,22 @@ public class EnvioEmailService implements Serializable {
 		// MONTANDO A MGS
 		String msg = " ";
 		for (Produto item : produtos) {
-			msg += " Produto: " + item.getNome() + " Qtd: " + item.getQuantidade() + "\n";
+			msg += " <b>Produto:<\b> " + item.getNome() + " Qtd: " + item.getQuantidade() + "\n";
 		}
 
 		// PEGANDO OS DIRETORES
-		List<Usuario> diretores;
-		diretores = this.usuarioDAO.pesquisarPorCargo();
+//		List<Usuario> diretores;
+//		diretores = this.usuarioDAO.pesquisarPorCargo();
+		
+		//PEGANDO USUARIO QUE RECEBE ALERTA
+		List<Usuario> usuariosAlerta;
+		usuariosAlerta = this.usuarioDAO.pesquisaUsuarioRecebeAlerta();
+		
 
 		MailMail mm = (MailMail) context.getBean("mailMail");
 
-		for (Usuario diretor : diretores)
-			mm.sendMail("alerta@gmail.com", diretor.getEmail(), "Produtos que estão acabando", msg);
+		for (Usuario usuarioAlerta : usuariosAlerta)
+			mm.sendMail("alerta@gmail.com", usuarioAlerta.getEmail(), "Produtos que estão acabando", msg);
 	}
 
 }

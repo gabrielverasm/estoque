@@ -43,7 +43,9 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, length = 20)
 	private String senha;
 	
-	private Boolean ativo = false;
+	private Boolean ativo = true;
+	
+	private Boolean recebeAlerta = false;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "usuario_grupousuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
@@ -152,6 +154,14 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Boolean getRecebeAlerta() {
+		return recebeAlerta;
+	}
+
+	public void setRecebeAlerta(Boolean recebeAlerta) {
+		this.recebeAlerta = recebeAlerta;
 	}
 
 }
