@@ -27,42 +27,51 @@ public class EnvioEmailService implements Serializable {
 	@Inject
 	private MovimentacaoDAO movimentacaoDAO;
 
+	private Movimentacao movimentacao;
+
 	public void verificaQuantidadeProdutoEstoque(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
 		movimentacao = this.movimentacaoDAO.porId(movimentacao.getId());
-		List<Produto> produtos = new ArrayList<>();
+		List<Produto> produtosAlerta = new ArrayList<>();
 
 		for (ItemMovimentacao item : movimentacao.getItensMovimentacao()) {
 			if (item.getProduto().getQuantidade() <= item.getProduto().getEstoqueMinimo()) {
-				produtos.add(item.getProduto());
+				produtosAlerta.add(item.getProduto());
 			}
 		}
 
-		if (!produtos.isEmpty())
-			enviaEmailComProdutos(produtos);
+		if (!produtosAlerta.isEmpty())
+			enviaEmailComProdutos(produtosAlerta);
 	}
 
 	public void enviaEmailComProdutos(List<Produto> produtos) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 
 		// MONTANDO A MGS
-		String msg = "Os produtos abaixo listados estão com estoque crítico e necessitam de aquisição." + "\n" + "\n"
-				+ "\n";
+		String msg = "A movimentação de número: " + "<strong>" + movimentacao.getId() + "</strong>"
+				+ ", e descrição: <strong>" + movimentacao.getDescricao()
+				+ "</strong>, deu saída em produtos com estoque crítico." + "\n" + "\n"
+				+ "<strong>Os produtos abaixo listados estão com estoque crítico e necessitam de aquisição.</strong>"
+				+ "\n" + "\n" + "\n";
 		for (Produto item : produtos) {
-			msg += "Produto: " + item.getNome() + "       Estoque: " + item.getQuantidade() + "\n";
+			msg += "<strong>Produto:</strong> " + item.getNome() + "       <strong>Estoque:</strong> "
+					+ item.getQuantidade() + "\n";
 		}
-
-		// PEGANDO OS DIRETORES
-		// List<Usuario> diretores;
-		// diretores = this.usuarioDAO.pesquisarPorCargo();
 
 		// PEGANDO USUARIO QUE RECEBE ALERTA
 		List<Usuario> usuariosAlerta;
 		usuariosAlerta = this.usuarioDAO.pesquisaUsuarioRecebeAlerta();
 
-		MailMail mm = (MailMail) context.getBean("mailMail");
+		// Pegando destinatários
+		String[] destinatarios = new String[usuariosAlerta.size()];
 
-		for (Usuario usuarioAlerta : usuariosAlerta)
-			mm.sendMail("alerta@gmail.com", usuarioAlerta.getEmail(), "Alerta - Estoque insuficiente.", msg);
+		for (int i = 0; i < usuariosAlerta.size(); i++) {
+			destinatarios[i] = usuariosAlerta.get(i).getEmail();
+		}
+
+		// Enviando e-mail
+		MailMail mm = (MailMail) context.getBean("mailMail");
+		mm.sendMail(destinatarios, "Alerta - Estoque insuficiente (Movimentação: " + movimentacao.getId() + ").", msg);
 	}
 
 }
