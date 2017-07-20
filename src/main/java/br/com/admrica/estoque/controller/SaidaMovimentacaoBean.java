@@ -28,15 +28,16 @@ public class SaidaMovimentacaoBean implements Serializable {
 
 	@Inject
 	private Event<MovimentacaoAlteradoEvent> movimentacaoAlteradoEvent;
-	
+
 	@Inject
 	private EnvioEmailService envioEmailService;
 
+	public void retirarDoEstoque() {
 
-	public void retirarDoEstoque(){
 		this.movimentacao.removerItemVazio();
 		this.movimentacao = this.saidaMovimentacaoService.retirarDoEstoque(this.movimentacao);
-		this.envioEmailService.verificaQuantidadeProdutoEstoque(this.movimentacao);
+		this.envioEmailService.verificaProdutosComAlerta(this.movimentacao);
 		this.movimentacaoAlteradoEvent.fire(new MovimentacaoAlteradoEvent(this.movimentacao));
+
 	}
 }

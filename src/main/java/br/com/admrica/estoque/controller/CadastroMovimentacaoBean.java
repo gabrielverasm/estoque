@@ -53,9 +53,9 @@ public class CadastroMovimentacaoBean implements Serializable {
 	private EntradaMovimentacaoBean entradaMovimentacaoBean;
 
 	private Date currentDate = new Date();
-	
-	private Long numeroItem; 
-	
+
+	private Long numeroItem;
+
 	public Date getCurrentDate() {
 		return currentDate;
 	}
@@ -206,6 +206,7 @@ public class CadastroMovimentacaoBean implements Serializable {
 	}
 
 	public void entradaSaida() {
+		this.salvar();
 		if (movimentacao.getOperacao().equals("entrada")) {
 			entradaMovimentacaoBean.adicionarNoEstoque();
 		} else {

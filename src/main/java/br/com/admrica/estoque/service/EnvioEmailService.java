@@ -6,10 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import br.com.admrica.estoque.controller.MailMail;
+import br.com.admrica.estoque.controller.EnvioMovimentacaoBean;
 import br.com.admrica.estoque.model.ItemMovimentacao;
 import br.com.admrica.estoque.model.Movimentacao;
 import br.com.admrica.estoque.model.Produto;
@@ -27,10 +24,10 @@ public class EnvioEmailService implements Serializable {
 	@Inject
 	private MovimentacaoDAO movimentacaoDAO;
 
-	private Movimentacao movimentacao;
+	@Inject
+	private EnvioMovimentacaoBean envioMovimentacaoBean;
 
-	public void verificaQuantidadeProdutoEstoque(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
+	public void verificaProdutosComAlerta(Movimentacao movimentacao) {
 		movimentacao = this.movimentacaoDAO.porId(movimentacao.getId());
 		List<Produto> produtosAlerta = new ArrayList<>();
 
@@ -40,38 +37,19 @@ public class EnvioEmailService implements Serializable {
 			}
 		}
 
-		if (!produtosAlerta.isEmpty())
-			enviaEmailComProdutos(produtosAlerta);
-	}
+		if (!produtosAlerta.isEmpty()) {
+			// PEGANDO USUARIO QUE RECEBE ALERTA
+			List<Usuario> usuariosAlerta;
+			usuariosAlerta = this.usuarioDAO.pesquisaUsuarioRecebeAlerta();
 
-	public void enviaEmailComProdutos(List<Produto> produtos) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
+			// Pegando destinatários
+			String[] destinatarios = new String[usuariosAlerta.size()];
+			for (int i = 0; i < usuariosAlerta.size(); i++) {
+				destinatarios[i] = usuariosAlerta.get(i).getEmail();
+			}
 
-		// MONTANDO A MGS
-		String msg = "A movimentação de número: " + "<strong>" + movimentacao.getId() + "</strong>"
-				+ ", e descrição: <strong>" + movimentacao.getDescricao()
-				+ "</strong>, deu saída em produtos com estoque crítico." + "\n" + "\n"
-				+ "<strong>Os produtos abaixo listados estão com estoque crítico e necessitam de aquisição.</strong>"
-				+ "\n" + "\n" + "\n";
-		for (Produto item : produtos) {
-			msg += "<strong>Produto:</strong> " + item.getNome() + "       <strong>Estoque:</strong> "
-					+ item.getQuantidade() + "\n";
+			this.envioMovimentacaoBean.enviaAlertaMovimentacao(movimentacao, produtosAlerta, destinatarios);
 		}
 
-		// PEGANDO USUARIO QUE RECEBE ALERTA
-		List<Usuario> usuariosAlerta;
-		usuariosAlerta = this.usuarioDAO.pesquisaUsuarioRecebeAlerta();
-
-		// Pegando destinatários
-		String[] destinatarios = new String[usuariosAlerta.size()];
-
-		for (int i = 0; i < usuariosAlerta.size(); i++) {
-			destinatarios[i] = usuariosAlerta.get(i).getEmail();
-		}
-
-		// Enviando e-mail
-		MailMail mm = (MailMail) context.getBean("mailMail");
-		mm.sendMail(destinatarios, "Alerta - Estoque insuficiente (Movimentação: " + movimentacao.getId() + ").", msg);
 	}
-
 }

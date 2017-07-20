@@ -8,37 +8,33 @@ import br.com.admrica.estoque.model.Movimentacao;
 import br.com.admrica.estoque.model.StatusMovimentacao;
 import br.com.admrica.estoque.repository.MovimentacaoDAO;
 import br.com.admrica.estoque.util.jpa.Transactional;
+import br.com.admrica.estoque.util.jsf.FacesUtil;
 
 public class SaidaMovimentacaoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	// @Inject
+	// private MovimentacaoService movimentacaoService;
 
-//	@Inject
-//	private MovimentacaoService movimentacaoService;
-	
 	@Inject
 	private EstoqueService estoqueService;
-	
+
 	@Inject
 	private MovimentacaoDAO movimentacaoDAO;
 
 	@Transactional
 	public Movimentacao retirarDoEstoque(Movimentacao movimentacao) {
 
-		
-		//movimentacao = this.pedidoService.salvar(pedido);
+		try {
+			this.estoqueService.baixarItensEstoque(movimentacao);
 
-//		if (movimentacao.isNaoEmissivel()) {
-//			throw new NegocioException(
-//					"Pedido não pode ser emitido com status: "
-//							+ pedido.getStatus().getDescricao());
-//		}
-		
-		this.estoqueService.baixarItensEstoque(movimentacao);
-		
-		movimentacao.setStatusMovimentacao(StatusMovimentacao.BAIXADO);
-		movimentacao = this.movimentacaoDAO.salvar(movimentacao);
+			movimentacao.setStatusMovimentacao(StatusMovimentacao.BAIXADO);
+			movimentacao = this.movimentacaoDAO.salvar(movimentacao);
+			FacesUtil.InfoMessage("Movimentação baixada com sucesso.");
+		} catch (Exception e) {
+			FacesUtil.ErrorMessage("Erro ao tentar baixar o movimentacao");
+		}
 
 		return movimentacao;
 	}

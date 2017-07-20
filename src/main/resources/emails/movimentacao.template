@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <td style="width: 100px">Número:</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Cliente:</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Valor total:</td>
+                <td>valorteste</td>
+            </tr>
+        </table>
+        
+        <br/>
+        <table border="1" cellspacing="0" cellpadding="3">
+            <tr>
+                <th>Produto</th>
+                <th>Valor unitário</th>
+                <th>Quantidade</th>
+                <th>Valor total</th>
+            </tr>
+            
+        </table>
+    </body>
+</html>
