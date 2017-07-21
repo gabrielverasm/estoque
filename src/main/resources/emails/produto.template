@@ -1,0 +1,27 @@
+<html>
+    <body>
+    	  	
+        <br><br>
+        
+        <center>O produto: <strong>$produtos.nome</strong> está com quantidade crítica (<strong>Estoque atual: $produtos.quantidade</strong>).</center>
+		
+		<br><br>
+        <br>
+        <center>
+        <table>
+        	<tr>
+        		<th colspan="2" style="text-align: center"><strong>Detalhes da Movimentação</strong></th>
+        	</tr>
+            <tr>
+            	<th>Número:</th>
+            	<td>$movimentacao.id</td>
+            </tr>
+           	<tr>
+	            <th>Descrição:</th>
+	            <td>$movimentacao.descricao</td>
+	        </tr>
+        </table>
+        </center>
+        
+    </body>
+</html>

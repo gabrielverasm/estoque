@@ -17,7 +17,7 @@ import br.com.admrica.estoque.util.mail.Mailer;
 
 @Named
 @RequestScoped
-public class EnvioMovimentacaoBean implements Serializable {
+public class AlertaMailProdutoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,14 +28,17 @@ public class EnvioMovimentacaoBean implements Serializable {
 	// @MovimentacaoEdicao
 	// private Movimentacao movimentacao;
 
-	public void enviaAlertaMovimentacao(Movimentacao movimentacao, List<Produto> produtos, String[] destinatarios) {
+	public void enviaAlertaProduto(Movimentacao movimentacao, List<Produto> produtos, String[] destinatarios) {
 		try {
-			MailMessage message = mailer.novaMensagem();
 
-			message.to(destinatarios).subject("CDI TEste2")
-					.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/movimentacao.template")))
-					.put("movimentacao", movimentacao).send();
+			for (Produto item : produtos) {
+				MailMessage message = mailer.novaMensagem();
 
+				message.to(destinatarios).subject("Alerta estoque insuficiente! (" + item.getNome() + ").")
+						.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/produto.template")))
+						.put("movimentacao", movimentacao)
+						.put("produtos", item).send();
+			}
 			FacesUtil.InfoMessage("Alerta enviado por e-mail.");
 		} catch (Exception e) {
 			FacesUtil.ErrorMessage("Erro ao enviar alerta por e-mail!");

@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.admrica.estoque.controller.EnvioMovimentacaoBean;
+import br.com.admrica.estoque.controller.AlertaMailMovimentacaoBean;
+import br.com.admrica.estoque.controller.AlertaMailProdutoBean;
 import br.com.admrica.estoque.model.ItemMovimentacao;
 import br.com.admrica.estoque.model.Movimentacao;
 import br.com.admrica.estoque.model.Produto;
@@ -25,7 +26,10 @@ public class EnvioEmailService implements Serializable {
 	private MovimentacaoDAO movimentacaoDAO;
 
 	@Inject
-	private EnvioMovimentacaoBean envioMovimentacaoBean;
+	private AlertaMailMovimentacaoBean envioMovimentacaoBean;
+
+	@Inject
+	private AlertaMailProdutoBean alertaMailProdutoBean;
 
 	public void verificaProdutosComAlerta(Movimentacao movimentacao) {
 		movimentacao = this.movimentacaoDAO.porId(movimentacao.getId());
@@ -48,7 +52,8 @@ public class EnvioEmailService implements Serializable {
 				destinatarios[i] = usuariosAlerta.get(i).getEmail();
 			}
 
-			this.envioMovimentacaoBean.enviaAlertaMovimentacao(movimentacao, produtosAlerta, destinatarios);
+//			this.envioMovimentacaoBean.enviaAlertaMovimentacao(movimentacao, produtosAlerta, destinatarios);
+			this.alertaMailProdutoBean.enviaAlertaProduto(movimentacao, produtosAlerta, destinatarios);
 		}
 
 	}
