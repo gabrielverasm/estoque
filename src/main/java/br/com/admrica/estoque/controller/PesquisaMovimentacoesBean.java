@@ -23,6 +23,7 @@ public class PesquisaMovimentacoesBean implements Serializable {
 	private MovimentacaoDAO movimentacaoDAO;
 
 	private MovimentacaoParaPesquisa filtro;
+
 	private List<Movimentacao> movimentacoesFiltrados;
 
 	public PesquisaMovimentacoesBean() {
@@ -33,10 +34,8 @@ public class PesquisaMovimentacoesBean implements Serializable {
 	public void pesquisar() {
 		movimentacoesFiltrados = movimentacaoDAO.filtrados(filtro);
 	}
-	
 
-	
-//get and set
+	// get and set
 	public StatusMovimentacao[] getStatuses() {
 		return StatusMovimentacao.values();
 	}

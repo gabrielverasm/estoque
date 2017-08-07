@@ -20,11 +20,11 @@
 
 		</p:column>
 
-<!-- 		<p:column headerText="Cod. de Barras" -->
-<!-- 			style="text-align: center; width: 80px"> -->
-<!-- 			<h:outputText value="#{item.produto.codigoDeBarras}" -->
-<!-- 				rendered="#{item.produtoAssociado}" /> -->
-<!-- 		</p:column> -->
+		<!-- 		<p:column headerText="Cod. de Barras" -->
+		<!-- 			style="text-align: center; width: 80px"> -->
+		<!-- 			<h:outputText value="#{item.produto.codigoDeBarras}" -->
+		<!-- 				rendered="#{item.produtoAssociado}" /> -->
+		<!-- 		</p:column> -->
 
 		<p:column headerText="Produto" style="text-align: center;">
 			<h:outputText value="#{item.produto .nome}"
@@ -52,9 +52,14 @@
 			</p:inputText>
 		</p:column>
 
-		<p:column headerText="Estoque" style="text-align: center; width: 60px">
-			<h:outputText value="#{item.produto.quantidade}"
-				rendered="#{item.produtoAssociado}" />
+		<p:column headerText="Est." style="width: 50px"
+			sortBy="#{item.produto.quantidade}">
+			<h:outputText value="#{item.produto.quantidade}" />
+		</p:column>
+
+		<p:column headerText="Est. Min." style="width: 76px"
+			sortBy="#{item.produto.estoqueMinimo}">
+			<h:outputText value="#{item.produto.estoqueMinimo}" />
 		</p:column>
 
 

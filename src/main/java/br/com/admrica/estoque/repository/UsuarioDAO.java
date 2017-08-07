@@ -37,7 +37,8 @@ public class UsuarioDAO implements Serializable {
 		Usuario usuario = null;
 
 		try {
-			usuario = this.manager.createQuery("from Usuario where lower(email) = :email and ativo = true", Usuario.class)
+			usuario = this.manager
+					.createQuery("from Usuario where lower(email) = :email and ativo = true", Usuario.class)
 					.setParameter("email", email.toLowerCase()).getSingleResult();
 		} catch (NoResultException e) {
 			// nenhum usuário encontrado com o e-mail informado.
@@ -48,18 +49,17 @@ public class UsuarioDAO implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<Usuario> pesquisarPorCargo() {
 		String jpql = "from Usuario u where u.cargo = 'DIRECAO'";
-		Query query = this.manager.createQuery(jpql,Usuario.class);
+		Query query = this.manager.createQuery(jpql, Usuario.class);
 		return query.getResultList();
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Usuario> pesquisaUsuarioRecebeAlerta(){
+	public List<Usuario> pesquisaUsuarioRecebeAlerta() {
 		String jpql = "from Usuario u where u.recebeAlerta = true and ativo = true";
-		Query query = this.manager.createQuery(jpql,Usuario.class);
-		
+		Query query = this.manager.createQuery(jpql, Usuario.class);
+
 		List<Usuario> lista = query.getResultList();
-		for(Usuario u : lista ){
+		for (Usuario u : lista) {
 			System.out.println(u.getEmail());
 		}
 		return query.getResultList();

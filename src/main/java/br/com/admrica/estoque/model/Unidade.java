@@ -1,7 +1,7 @@
 package br.com.admrica.estoque.model;
 
 public enum Unidade {
-	UNIDADE("Und - Unidade"), QUILOGRAMA("Kg - Quilograma"), LITRO("l - Litro");
+	UNIDADE("Und."), QUILOGRAMA("Kg"), LITRO("l");
 
 	private String descricao;
 

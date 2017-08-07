@@ -8,7 +8,10 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.admrica.estoque.model.Grupo;
 import br.com.admrica.estoque.model.Produto;
+import br.com.admrica.estoque.model.Unidade;
+import br.com.admrica.estoque.repository.ProdutoDAO;
 import br.com.admrica.estoque.repository.filter.ProdutoParaPesquisa;
 import br.com.admrica.estoque.service.ProdutoService;
 
@@ -17,30 +20,42 @@ import br.com.admrica.estoque.service.ProdutoService;
 public class PesquisaProdutosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
-	private ProdutoService produtos;
-	
+	private ProdutoService produtoService;
+
+	@Inject
+	private ProdutoDAO produtoDAO;
+
 	private ProdutoParaPesquisa filtro;
-	
+
 	private List<Produto> produtosFiltrados = new ArrayList<Produto>();
-	
+
 	private Produto produtoSelecionado;
-	
+
 	public PesquisaProdutosBean() {
 		filtro = new ProdutoParaPesquisa();
 	}
-	
+
 	public void pesquisar() {
-		this.produtosFiltrados = produtos.filtrados(filtro);
+		this.produtosFiltrados = produtoDAO.filtrados(filtro);
 	}
-	
-	public void remover(){
-		produtos.remover(produtoSelecionado);
+
+	public void remover() {
+		produtoService.remover(produtoSelecionado);
 		produtosFiltrados.remove(produtoSelecionado);
 	}
-	
-	//get and set
+
+	// get and set
+
+	public Grupo[] getGrupos() {
+		return Grupo.values();
+	}
+
+	public Unidade[] getUnidades() {
+		return Unidade.values();
+	}
+
 	public List<Produto> getProdutosFiltrados() {
 		return produtosFiltrados;
 	}
@@ -56,6 +71,5 @@ public class PesquisaProdutosBean implements Serializable {
 	public void setProdutoSelecionado(Produto produtoSelecionado) {
 		this.produtoSelecionado = produtoSelecionado;
 	}
-	
-	
+
 }

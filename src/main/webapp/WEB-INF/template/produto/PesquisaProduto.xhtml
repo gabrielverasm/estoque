@@ -11,16 +11,46 @@
 		<p:tabView style="margin-top: 10px;" id="tabView">
 
 			<p:tab title="Pesquisa">
-				<p:panelGrid columns="3" id="pngPesq"
+				<p:panelGrid columns="4" id="pngPesq"
 					styleClass="ui-panelgrid-blank"
 					style="margin-left: auto; margin-right: auto; margin-top: 20px">
 
-					<p:outputLabel value="Nome" for="nome" />
-					<p:inputText id="nome" size="60"
+					<p:outputLabel value="Número:" />
+					<h:panelGroup>
+						<p:inputText size="5" placeholder="Num. de."
+							value="#{pesquisaProdutosBean.filtro.numeroDe}" />
+	    			a
+	    			<p:inputText size="5" placeholder="Num até."
+							value="#{pesquisaProdutosBean.filtro.numeroAte}" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText id="nome" size="35"
 						value="#{pesquisaProdutosBean.filtro.nome}" />
 
+
+					<p:outputLabel value="Unidade:" />
+					<p:selectManyCheckbox
+						value="#{pesquisaProdutosBean.filtro.unidades}">
+						<f:selectItems value="#{pesquisaProdutosBean.unidades}"
+							var="unidades" itemValue="#{unidades}"
+							itemLabel="#{unidades.descricao}" />
+					</p:selectManyCheckbox>
+
+
+<!-- 					<p:outputLabel value="Grupo:" /> -->
+<!-- 					<p:selectManyCheckbox value="#{pesquisaProdutosBean.filtro.grupos}"> -->
+<!-- 						<f:selectItems value="#{pesquisaProdutosBean.grupos}" var="grupos" -->
+<!-- 							itemValue="grupos" itemLabel="#{grupos.descricao}" /> -->
+<!-- 					</p:selectManyCheckbox> -->
+				</p:panelGrid>
+
+				<p:panelGrid columns="1" id="pngBtPesq"
+					styleClass="ui-panelgrid-blank"
+					style="margin-left: auto; margin-right: auto;">
+
 					<p:commandButton value="Pesquisar" title="Pesquisar produto"
-						process="nome @this" action="#{pesquisaProdutosBean.pesquisar}"
+						process="frmProduto:frmPesquisa:tabView:pngPesq @this" action="#{pesquisaProdutosBean.pesquisar}"
 						update=":frmProduto:frmPesquisa:tabView:dtbPesquisa" />
 
 				</p:panelGrid>
@@ -28,18 +58,14 @@
 
 				<p:dataTable id="dtbPesquisa" reflow="true"
 					value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto"
-					style="margin-top: 20px;" emptyMessage="Nenhum produto encontrado."
-					rows="5" paginator="true" paginatorAlwaysVisible="false"
+					style="margin-top: 20px; text-align: center;"
+					emptyMessage="Nenhum produto encontrado." rows="10"
+					paginator="true" paginatorAlwaysVisible="false"
 					paginatorPosition="bottom" sortBy="#{produto.id}">
 
 					<p:column headerText="Id" style="width: 32px;"
 						sortBy="#{produto.id}">
 						<h:outputText value="#{produto.id}" />
-					</p:column>
-
-					<p:column headerText="Cód. de barras" style="width: 120px"
-						sortBy="#{produto.codigoDeBarras}">
-						<h:outputText value="#{produto.codigoDeBarras}" />
 					</p:column>
 
 					<p:column headerText="Nome" sortBy="#{produto.nome}">
@@ -61,19 +87,24 @@
 						<h:outputText value="#{produto.estoqueMinimo}" />
 					</p:column>
 
-					<p:column style="width: 70px;">
+					<p:column headerText="Qtd Diár." style="width: 77px"
+						sortBy="#{produto.qtdDiaria}">
+						<h:outputText value="#{produto.qtdDiaria}" />
+					</p:column>
+
+					<p:column style="width: 33px;">
 						<p:button icon="ui-icon-pencil" title="Editar Produto."
 							outcome="/produtos/CadastroProduto">
 							<f:param name="produto" value="#{produto.id}" />
 						</p:button>
 
-<!-- 						<p:commandButton icon="ui-icon-trash" title="Excluir Produto" -->
-<!-- 							process="@this" update=":frmProduto:frmPesquisa:exclusaoDialog" -->
-<!-- 							oncomplete="PF('confirmacaoExclusao').show()"> -->
-<!-- 							<f:setPropertyActionListener -->
-<!-- 								target="#{pesquisaProdutosBean.produtoSelecionado}" -->
-<!-- 								value="#{produto}" /> -->
-<!-- 						</p:commandButton> -->
+						<!-- 						<p:commandButton icon="ui-icon-trash" title="Excluir Produto" -->
+						<!-- 							process="@this" update=":frmProduto:frmPesquisa:exclusaoDialog" -->
+						<!-- 							oncomplete="PF('confirmacaoExclusao').show()"> -->
+						<!-- 							<f:setPropertyActionListener -->
+						<!-- 								target="#{pesquisaProdutosBean.produtoSelecionado}" -->
+						<!-- 								value="#{produto}" /> -->
+						<!-- 						</p:commandButton> -->
 					</p:column>
 				</p:dataTable>
 			</p:tab>

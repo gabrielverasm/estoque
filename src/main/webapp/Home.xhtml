@@ -10,41 +10,90 @@
 	<ui:define name="corpo">
 
 		<h:form>
-			<p:dataTable var="produto" value="#{homeBean.listaProdutoAcabando}"
-				style="margin-top: 20px;" emptyMessage="Nenhum produto encontrado."
-				rows="25" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom" sortBy="#{produto.id}">
+			<p:dataTable var="produtoAlerta"
+				value="#{homeBean.listaProdutoAcabando}" style="margin-top: 20px;"
+				emptyMessage="Nenhum produto encontrado." rows="10" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				sortBy="#{produtoAlerta.nome}" styleClass="dtProdutoAlerta">
 
 				<f:facet name="header">
-        Estoque Crítico
-    </f:facet>
+        			Produtos em Alerta! (Estoque &lt; Quantidade Mínima)
+    			</f:facet>
 
-				<p:column headerText="Id" style="width: 32px;"
-					sortBy="#{produto.id}">
-					<h:outputText value="#{produto.id}" />
+				<p:column headerText="Id" style="width: 32px; text-align: center;"
+					sortBy="#{produtoAlerta.id}">
+					<h:outputText value="#{produtoAlerta.id}" />
 				</p:column>
 
-				<p:column headerText="Nome" sortBy="#{produto.nome}">
-					<h:outputText value="#{produto.nome}" />
+				<p:column headerText="Nome" sortBy="#{produtoAlerta.nome}">
+					<h:outputText value="#{produtoAlerta.nome}" />
 				</p:column>
 
 				<p:column headerText="Grupo" style="width: 100px"
-					sortBy="#{produto.grupo}">
-					<h:outputText value="#{produto.grupo}" />
+					sortBy="#{produtoAlerta.grupo}">
+					<h:outputText value="#{produtoAlerta.grupo}" />
 				</p:column>
 
-				<p:column headerText="Est." style="width: 50px"
-					sortBy="#{produto.quantidade}">
-					<h:outputText value="#{produto.quantidade}" />
+				<p:column headerText="empenho"
+					style="width: 81px; text-align:center"
+					sortBy="#{produtoAlerta.empenhado}">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{produtoAlerta.empenhado}" />
 				</p:column>
 
-				<p:column headerText="Est. Min." style="width: 76px"
-					sortBy="#{produto.estoqueMinimo}">
-					<h:outputText value="#{produto.estoqueMinimo}" />
+				<p:column headerText="Est." style="width: 50px; text-align: center;"
+					sortBy="#{produtoAlerta.quantidade}">
+					<h:outputText value="#{produtoAlerta.quantidade}" />
 				</p:column>
 
-
+				<p:column headerText="Est. Min."
+					style="width: 76px; text-align: center;"
+					sortBy="#{produtoAlerta.estoqueMinimo}">
+					<h:outputText value="#{produtoAlerta.estoqueMinimo}" />
+				</p:column>
 			</p:dataTable>
+
+			<p:separator style="margin-top: 30px; width: 70% !Important" />
+
+			<p:dataTable var="produtoCritico"
+				value="#{homeBean.listaProdutoQuantidadeCriticaTrintaPorCento}"
+				style="margin-top: 30px; text-align: center;"
+				emptyMessage="Nenhum produto encontrado." rows="10" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				sortBy="#{produtoCritico.nome}">
+
+				<f:facet name="header">
+        			Estoque Baixo (Estoque &gt; 30% Quantidade Mínima)
+    			</f:facet>
+
+				<p:column headerText="Id" style="width: 32px; text-align: center;"
+					sortBy="#{produtoCritico.id}">
+					<h:outputText value="#{produtoCritico.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{produtoCritico.nome}">
+					<h:outputText value="#{produtoCritico.nome}" />
+				</p:column>
+
+				<p:column headerText="Grupo" style="width: 100px"
+					sortBy="#{produtoCritico.grupo}">
+					<h:outputText value="#{produtoCritico.grupo}" />
+				</p:column>
+
+				<p:column headerText="Est." style="width: 50px; text-align: center;"
+					sortBy="#{produtoCritico.quantidade}">
+					<h:outputText value="#{produtoCritico.quantidade}" />
+				</p:column>
+
+				<p:column headerText="Est. Min."
+					style="width: 76px; text-align: center;"
+					sortBy="#{produtoCritico.estoqueMinimo}">
+					<h:outputText value="#{produtoCritico.estoqueMinimo}" />
+				</p:column>
+			</p:dataTable>
+
+			<p:separator style="margin-top: 30px; width: 70% !Important" />
+
 
 		</h:form>
 	</ui:define>

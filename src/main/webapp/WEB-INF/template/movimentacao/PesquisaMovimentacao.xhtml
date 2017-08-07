@@ -9,7 +9,7 @@
 		<p:panelGrid id="pngpesquisaMov" columns="4" style="margin-top: 20px"
 			styleClass="ui-panelgrid-blank">
 
-			<p:outputLabel value="Número" />
+			<p:outputLabel value="Número:" />
 			<h:panelGroup>
 				<p:inputText size="5" placeholder="Num. de."
 					value="#{pesquisaMovimentacoesBean.filtro.numeroDe}" />
@@ -57,7 +57,7 @@
 		<p:dataTable id="dtbMovimentacao" reflow="true" var="movimentacao"
 			style="margin-top: 10px" sortBy="#{movimentacao.id}"
 			value="#{pesquisaMovimentacoesBean.movimentacoesFiltrados}"
-			emptyMessage="Nenhuma movimentação encontrada." rows="5"
+			emptyMessage="Nenhuma movimentação encontrada." rows="10"
 			paginator="true" paginatorAlwaysVisible="false"
 			paginatorPosition="bottom">
 

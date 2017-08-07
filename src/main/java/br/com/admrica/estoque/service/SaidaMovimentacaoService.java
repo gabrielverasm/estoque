@@ -33,7 +33,8 @@ public class SaidaMovimentacaoService implements Serializable {
 			movimentacao = this.movimentacaoDAO.salvar(movimentacao);
 			FacesUtil.InfoMessage("Movimentação baixada com sucesso.");
 		} catch (Exception e) {
-			FacesUtil.ErrorMessage("Erro ao tentar baixar o movimentacao");
+			FacesUtil.ErrorMessage("Erro ao remover produto do estoque.");
+			e.printStackTrace();
 		}
 
 		return movimentacao;

@@ -17,52 +17,51 @@ public class ProdutoService implements Serializable {
 
 	@Inject
 	private ProdutoDAO produtoDAO;
-	
+
 	@Transactional
 	public Produto salvar(Produto produto) {
 		return produtoDAO.guardar(produto);
 	}
-	
+
 	@Transactional
-	public void remover(Produto produto){
+	public void remover(Produto produto) {
 		produtoDAO.remover(produto);
 	}
-	
-	public Produto porId(Long id){
+
+	public Produto porId(Long id) {
 		return this.produtoDAO.porId(id);
 	}
-	
+
 	public List<Produto> filtrados(ProdutoParaPesquisa filtro) {
+
 		List<Produto> lista = null;
-		
-//		if(StringUtils.isNotBlank(filtro.getSku()) && StringUtils.isNotBlank(filtro.getNome())){
-//			FacesUtil.AvisoMessage("Preencha apenas um dos campos abaixo");
-//			return null;
-//		}
-		
 		lista = produtoDAO.filtrados(filtro);
-		
-		if(lista.isEmpty()){
+
+		if (lista.isEmpty()) {
 			FacesUtil.AvisoMessage("Nenhum produto encontrado!");
 			return null;
 		}
-		
+
 		return lista;
 	}
-	
-	public List<Produto> pesquisarPorProdutoAcabando(){
-		return this.produtoDAO.pesquisarPorProdutoAcabando();
+
+	public List<Produto> pesquisarPorProdutoAlerta() {
+		return this.produtoDAO.pesquisarPorProdutoAlerta();
 	}
-	
-	public List<Produto> porNome(String nome){
+
+	public List<Produto> pesquisarPorProdutoQuantidadeCriticaTrintaPorCento() {
+		return this.produtoDAO.pesquisarPorProdutoQuantidadeCriticaTrintaPorCento();
+	}
+
+	public List<Produto> porNome(String nome) {
 		return this.produtoDAO.porNome(nome.toUpperCase());
 	}
-	
-	public Produto porSku(String sku){
-		return this.produtoDAO.porSku(sku);
-	}
-	
-	public List<Produto> listarTodos(){
+
+	// public Produto porSku(String sku) {
+	// return this.produtoDAO.porSku(sku);
+	// }
+
+	public List<Produto> listarTodos() {
 		return this.produtoDAO.listarTodos();
 	}
 

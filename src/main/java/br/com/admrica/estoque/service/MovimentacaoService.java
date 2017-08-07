@@ -65,7 +65,7 @@ public class MovimentacaoService implements Serializable {
 			FacesUtil.InfoMessage("Movimentacao salvo com sucesso!");
 
 		} catch (Exception e) {
-			FacesUtil.ErrorMessage("Erro ao tentar salva o movimentacao");
+			FacesUtil.ErrorMessage("Erro ao tentar salva a movimentacao");
 		}
 
 		return movimentacao;

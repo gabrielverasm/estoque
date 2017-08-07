@@ -65,6 +65,8 @@ public class Produto implements Serializable {
 
 	private Boolean alerta = false;
 
+	private Boolean empenhado = false;
+
 	// private List<ItemProduto> itensProduto = new ArrayList<>();
 
 	@ManyToOne
@@ -214,8 +216,11 @@ public class Produto implements Serializable {
 			throw new NegocioException(
 					"Não ha disponibilidade no estoque de " + quantidade + " itens produto " + this.getNome());
 		}
-		if (novaQuantidade <= estoqueMinimo) {
+		if (novaQuantidade <= estoqueMinimo && empenhado == false) {
 			alerta = true;
+		}
+		if (novaQuantidade <= estoqueMinimo) {
+			alerta = false;
 		}
 
 		this.setQuantidade(novaQuantidade);
@@ -234,6 +239,14 @@ public class Produto implements Serializable {
 
 	public void setAlerta(Boolean alerta) {
 		this.alerta = alerta;
+	}
+
+	public Boolean getEmpenhado() {
+		return empenhado;
+	}
+
+	public void setEmpenhado(Boolean empenhado) {
+		this.empenhado = empenhado;
 	}
 
 }
