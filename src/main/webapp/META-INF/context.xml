@@ -9,7 +9,7 @@
 		factory="org.apache.naming.factory.BeanFactory" type="com.mchange.v2.c3p0.ComboPooledDataSource"
 		driverClass="com.mysql.jdbc.Driver"
 		
-		jdbcUrl="jdbc:mysql://bancohdeam.cawscjnuki8p.sa-east-1.rds.amazonaws.com:3306/hdeamdb?autoReconnect=true"
+		jdbcUrl="jdbc:mysql://bancohdeam.cawscjnuki8p.sa-east-1.rds.amazonaws.com:3306/pro_hdeamdb?autoReconnect=true"
 		user="admrica"
 		password="1056573Biel!"
 		
