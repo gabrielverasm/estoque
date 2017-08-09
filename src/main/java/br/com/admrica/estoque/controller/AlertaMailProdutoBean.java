@@ -36,8 +36,7 @@ public class AlertaMailProdutoBean implements Serializable {
 
 				message.to(destinatarios).subject("Alerta estoque insuficiente! (" + item.getNome() + ").")
 						.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/produto.template")))
-						.put("movimentacao", movimentacao)
-						.put("produtos", item).send();
+						.put("movimentacao", movimentacao).put("produtos", item).send();
 			}
 			FacesUtil.InfoMessage("Alerta enviado por e-mail.");
 		} catch (Exception e) {

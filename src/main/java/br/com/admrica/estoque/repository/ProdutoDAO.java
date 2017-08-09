@@ -134,7 +134,7 @@ public class ProdutoDAO implements Serializable {
 	@SuppressWarnings("unchecked")
 	public List<Produto> pesquisarPorProdutoQuantidadeCriticaTrintaPorCento() {
 		try {
-			String jpql = "from Produto p where p.quantidade <= (p.estoqueMinimo + (p.estoqueMinimo * 0.3)) and p.quantidade > p.estoqueMinimo";
+			String jpql = "from Produto p where p.quantidade <= (p.estoqueMinimo + (p.estoqueMinimo * 0.3)) and p.quantidade >= p.estoqueMinimo";
 			Query query = this.manager.createQuery(jpql, Produto.class);
 			return query.getResultList();
 		} catch (Exception e) {
