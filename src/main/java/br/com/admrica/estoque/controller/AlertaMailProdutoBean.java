@@ -2,6 +2,7 @@ package br.com.admrica.estoque.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -35,8 +36,10 @@ public class AlertaMailProdutoBean implements Serializable {
 				MailMessage message = mailer.novaMensagem();
 
 				message.to(destinatarios).subject("Alerta estoque insuficiente! (" + item.getNome() + ").")
-						.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/produto.template")))
-						.put("movimentacao", movimentacao).put("produtos", item).send();
+						.bodyHtml("<br><br><center>O produto: <strong>" + item.getNome()
+								+ "</strong> está com quantidade baixa (<strong>Estoque atual: " + item.getQuantidade()
+								+ "</strong>).<br><br><br>Movimentação (<strong>" + movimentacao.getId() + "</strong>): <strong>"
+								+ movimentacao.getDescricao() + "</strong>.").send();
 			}
 			FacesUtil.InfoMessage("Alerta enviado por e-mail.");
 		} catch (Exception e) {
