@@ -39,7 +39,7 @@ public class AlertaMailProdutoBean implements Serializable {
 						.bodyHtml("<br><br><center>O produto: <strong>" + item.getNome()
 								+ "</strong> está com quantidade baixa (<strong>Estoque atual: " + item.getQuantidade()
 								+ "</strong>).<br><br><br>Movimentação (<strong>" + movimentacao.getId() + "</strong>): <strong>"
-								+ movimentacao.getDescricao() + "</strong>.").send();
+								+ movimentacao.getDescricao() + "</strong>").send();
 			}
 			FacesUtil.InfoMessage("Alerta enviado por e-mail.");
 		} catch (Exception e) {
