@@ -43,6 +43,8 @@
 			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
 		<intercept-url pattern="/movimentacao/**"
 			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
+		<intercept-url pattern="/relatorios/**"
+			access="hasAnyRole('ADMINISTRADOR', 'ESTOQUE')" />
 		<intercept-url pattern="/usuarios/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/**" access="denyAll" />
 
