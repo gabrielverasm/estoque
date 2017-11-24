@@ -5,18 +5,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Relatório de Movimentações</ui:define>
+	<ui:define name="titulo">Relatório de Consumo de Produtos</ui:define>
 
 	<ui:define name="corpo">
 		<h:form id="frm">
-			<h1>Relatório de Movimentações</h1>
+			<h1>Relatório de Consumo de Produtos</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Emitir"
-						action="#{relatorioDeMovimentacaoBean.emitir()}" ajax="false" />
+						action="#{relatorioDeConsumoProdutosBean.emitir()}" ajax="false" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -24,19 +24,19 @@
 				styleClass="ui-panelgrid-blank">
 				<p:outputLabel value="Data de criação" />
 				<h:panelGroup>
-					<p:calendar value="#{relatorioDeMovimentacaoBean.dataInicio}"
+					<p:calendar value="#{relatorioDeConsumoProdutosBean.dataInicio}"
 						label="Data inicial" pattern="dd/MM/yyyy" size="8" required="true"
 						locale="pt" requiredMessage="Necessário preencher a Data Inicial"
 						maxdate="currentdate" />
 					<p:spacer width="8" />
 					<h:outputText value="a" />
 					<p:spacer width="8" />
-					<p:calendar value="#{relatorioDeMovimentacaoBean.dataFim}"
+					<p:calendar value="#{relatorioDeConsumoProdutosBean.dataFim}"
 						label="Data final" pattern="dd/MM/yyyy" size="8" required="true"
 						locale="pt" requiredMessage="Necessário preencher a Data Final"
 						maxdate="currentdate" />
 					<p:commandButton value="Emitir"
-						action="#{relatorioDeMovimentacaoBean.emitir()}"
+						action="#{relatorioDeConsumoProdutosBean.emitir()}"
 						style="margin-left: 20px" ajax="false" />
 				</h:panelGroup>
 			</p:panelGrid>

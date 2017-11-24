@@ -90,11 +90,17 @@
 					<p:menuitem value="Produtos" url="/produtos/CadastroProduto.xhtml" />
 
 					<p:submenu label="Relatórios">
-						<p:menuitem value="Movimentações" url="/relatorios/RelatorioDeMovimentacao.xhtml" />
+						<p:menuitem value="Movimentações" style="background-color:white"
+							url="/relatorios/RelatorioDeMovimentacao.xhtml" />
+						<p:menuitem value="Consumo de Produtos" style="background-color:white"
+							url="/relatorios/RelatorioDeConsumoProdutos.xhtml" />
+						<p:menuitem value="Produtos" style="background-color:white" ajax="false"
+							action="#{relatoriosSemFiltrosBean.emitirRelatorioDeProdutos()}" />
 					</p:submenu>
-					
+
 					<p:submenu label="Administração" url="Home.xhtml">
-						<p:menuitem value="Usuário" url="/usuarios/CadastroUsuario.xhtml" />
+						<p:menuitem value="Usuário" url="/usuarios/CadastroUsuario.xhtml"
+							style="background-color:white" />
 					</p:submenu>
 				</p:menubar>
 			</h:form>
